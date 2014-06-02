@@ -1,0 +1,66 @@
+c       Parameters:
+c       nparti = the number of particles in each species the simulation
+c       pi = 3.141596
+c       half = 0.5d0
+c       seedi,seedcon = a random seed
+c       xi,yi = the position of the particles
+c       vxi,vyi = the velocities of the particles
+c       fxi,fyi = the forces on the particles
+c       thetai = the angle of intent for the self-propulsion
+c       dt = the simulation time step
+c       dia = the particle diameter
+c       kappa = the inverse Debye screening length
+c       diffus = the translational diffusivity of the system
+c       rotdiffus = the angular diffusivity of the system
+c       vpropi = the particle self-propulsion speed
+c       pretrad = the normalization of translational Langevin noise
+c       prerotd = the normalization of rotational Langevin noise
+c       prescp1 = the coefficient of the screened Coulomb force
+c       boxa,invboxa = the dimensions of the system frame
+
+        implicit none
+        integer npart1,npart2
+        parameter(npart1=200,npart2=200)
+        integer nequil,ncor,nitn,nrun
+        parameter(nequil=1e4) ! 1e4
+        parameter(ncor=500) ! 50-500
+        parameter(nitn=5) ! 1-200
+        parameter(nrun=1e3)
+        real*8 pi,half
+        parameter(pi=4.0d0*datan(1.0d0),half=0.5d0)
+        
+        integer seedcon,lattice
+        integer seed1a,seed1b,seed1c,seed2a,seed2b,seed2c
+        real*8 x1(npart1),y1(npart1),x2(npart2),y2(npart2)
+        real*8 vx1(npart1),vy1(npart1),vx2(npart2),vy2(npart2)
+        real*8 fx1(npart1),fy1(npart1),fx2(npart2),fy2(npart2)
+        real*8 theta1(npart1),theta2(npart2)
+        real*8 x01(npart1),y01(npart1),x02(npart2),y02(npart2)
+        real*8 dt,dia,kappa,contact,diffus,rotdiffus
+        real*8 prescp1,preljp1,prerep1,preadh1
+        real*8 prescp2,preljp2,prerep2,preadh2
+        real*8 prescp12,preljp12,prerep12,preadh12
+        real*8 vprop1,vprop2,pretrad,prerotd
+        real*8 boxy,boxx,invboxy,invboxx
+        integer counter1x(npart1),counter1y(npart1)
+        integer counter2x(npart2),counter2y(npart2)
+        
+        integer histbinmax
+        parameter(histbinmax=200)
+        real*8 delta,invdelta
+        real*8 gr11(histbinmax),gr22(histbinmax),gr12(histbinmax)
+        
+        common /part1/ x1,y1,fx1,fy1,vx1,vy1,theta1
+        common /part2/ x2,y2,fx2,fy2,vx2,vy2,theta2
+        
+        common /sys1/ dt,dia,kappa,contact,diffus,rotdiffus
+        common /sys2/ boxy,boxx,invboxy,invboxx,x01,y01,x02,y02,lattice
+        common /sys3/ counter1x,counter1y,counter2x,counter2y
+        common /sys4/ seed1a,seed1b,seed1c,seed2a,seed2b,seed2c,seedcon
+        
+        common /mov1/ prescp1,preljp1,prerep1,preadh1
+        common /mov2/ prescp2,preljp2,prerep2,preadh2
+        common /mov3/ prescp12,preljp12,prerep12,preadh12
+        common /mov4/ vprop1,vprop2,pretrad,prerotd
+        
+        common /dist1/ gr11,gr22,gr12,delta,invdelta
