@@ -38,15 +38,27 @@ c           fluctuations do not contribute during equilibriation.
      &          dfloat(1-equil)*pretrad*normb
             vy1(i)=dfloat(1-equil)*vprop1*dsin(theta1(i))+fy1(i)+
      &          dfloat(1-equil)*pretrad*normc
-c           Shift each particle.
-            x1(i)=x1(i)+dt*vx1(i)
-            y1(i)=y1(i)+dt*vy1(i)
-            
-            counter1x(i)=counter1x(i) + floor(x1(i)*invboxx)
-            counter1y(i)=counter1y(i) + floor(y1(i)*invboxy)
-c           Adjust particle position to within the box dimensions.
-            x1(i)=x1(i)-boxx*floor(x1(i)*invboxx)
-            y1(i)=y1(i)-boxy*floor(y1(i)*invboxy)
+
+c           Circular conditions
+            if(circ .eq. 1) then
+c             Propose new coords
+              newx=x1(i)+dt*vx1(i)
+              newy=y1(i)+dt*vy1(i)
+c             Accept move if within the bounds
+              if( dsqrt(newx**2 + newy**2) .lt. radius ) then
+                x1(i)=newx
+                y1(i)=newy
+              endif
+            else
+c             Shift each particle.
+              x1(1)=x1(i)+dt*vx1(i)
+              y1(1)=y1(i)+dt*vy1(i)
+              counter1x(i)=counter1x(i) + floor(x1(i)*invboxx)
+              counter1y(i)=counter1y(i) + floor(y1(i)*invboxy)
+c             Adjust particle position to within the box dimensions.c
+              x1(i)=x1(i)-boxx*floor(x1(i)*invboxx)
+              y1(i)=y1(i)-boxy*floor(y1(i)*invboxy)
+            endif
         enddo
         
         do i=1,npart2
@@ -66,17 +78,26 @@ c           fluctuations do not contribute during equilibriation.
      &          dfloat(1-equil)*pretrad*normb
             vy2(i)=dfloat(1-equil)*vprop2*dsin(theta2(i))+fy2(i)+
      &          dfloat(1-equil)*pretrad*normc
-c           Shift each particle.
-            x2(i)=x2(i)+dt*vx2(i)
-            y2(i)=y2(i)+dt*vy2(i)
-            
-            counter2x(i)=counter2x(i) + floor(x2(i)*invboxx)
-            counter2y(i)=counter2y(i) + floor(y2(i)*invboxy)
-
-
-c           Adjust particle position to within the box dimensions.
-            x2(i)=x2(i)-boxx*floor(x2(i)*invboxx)
-            y2(i)=y2(i)-boxy*floor(y2(i)*invboxy)
+c           Circular conditions
+            if(circ .eq. 1) then
+c             Propose new coords
+              newx=x2(i)+dt*vx2(i)
+              newy=y2(i)+dt*vy2(i)
+c             Accept move if within the bounds
+              if( dsqrt(newx**2 + newy**2) .lt. radius ) then
+                x2(i)=newx
+                y2(i)=newy
+              endif
+            else
+c             Shift each particle.
+              x2(1)=x2(i)+dt*vx2(i)
+              y2(1)=y2(i)+dt*vy2(i)
+              counter2x(i)=counter2x(i) + floor(x2(i)*invboxx)
+              counter2y(i)=counter2y(i) + floor(y2(i)*invboxy)
+c             Adjust particle position to within the box dimensions.c
+              x2(i)=x2(i)-boxx*floor(x2(i)*invboxx)
+              y2(i)=y2(i)-boxy*floor(y2(i)*invboxy)
+            endif
         enddo
         
         return

@@ -45,6 +45,7 @@ c       Set experimental parameters (in CGS units).
         seed2c=-92733893 
         seedcon=-46766782
         lattice=0 ! 0 = lattice, 1 = displaced lattice, 2 = random
+        circ=1  ! 0 = box bounds, 1 = circular bounds
 
         diffus=boltz*temp/(3.0d0*pi*eta*dia) ! cm**2/s
         rotdiffus=500*boltz*temp/(pi*eta*dia*dia*dia) ! 1/s !*
@@ -115,6 +116,8 @@ c       Calculate force coefficients (dimensionless).
 c       Set box dimensions (dimensionless).
         boxy=dsqrt((pi*dia**2*npart)/(2.0d0*dsqrt(3.0d0)*packing))
         boxx=boxy*half*dsqrt(3.0d0)
+c       Determine circle radius for circular bounds
+        radius=dsqrt( (dia/2)**2*npart/packing )
         
         invboxy=1.0d0/boxy
         invboxx=1.0d0/boxx
@@ -135,6 +138,7 @@ c       Record parameters.
         write(1,'(t5,a15,t34,e17.10)') 'Packing Frac = ',packing
         write(1,'(t5,a12,t34,e17.10)') 'Box Width = ',boxx
         write(1,'(t5,a13,t34,e17.10)') 'Box Height = ',boxy
+        write(1,'(t5,a13,t34,e17.10)') 'Boundary Radius= ',radius
         write(1,'(t5,a15,t34,e17.10)') 'Packing Frac = ',packing
         write(1,'(t5,a12,t34,e17.10)') 'Time Unit = ',unittime
         write(1,'(t5,a14,t34,e17.10)') 'Length Unit = ',unitlength

@@ -29,9 +29,10 @@ c       boxa,invboxa = the dimensions of the system frame
         real*8 pi,half
         parameter(pi=4.0d0*datan(1.0d0),half=0.5d0)
         
-        integer seedcon,lattice
+        integer seedcon,lattice,circ
         integer seed1a,seed1b,seed1c,seed2a,seed2b,seed2c
         real*8 x1(npart1),y1(npart1),x2(npart2),y2(npart2)
+        real*8 newx, newy
         real*8 vx1(npart1),vy1(npart1),vx2(npart2),vy2(npart2)
         real*8 fx1(npart1),fy1(npart1),fx2(npart2),fy2(npart2)
         real*8 theta1(npart1),theta2(npart2)
@@ -41,7 +42,7 @@ c       boxa,invboxa = the dimensions of the system frame
         real*8 prescp2,preljp2,prerep2,preadh2
         real*8 prescp12,preljp12,prerep12,preadh12
         real*8 vprop1,vprop2,pretrad,prerotd
-        real*8 boxy,boxx,invboxy,invboxx
+        real*8 boxy,boxx,radius,invboxy,invboxx
         integer counter1x(npart1),counter1y(npart1)
         integer counter2x(npart2),counter2y(npart2)
         
@@ -50,11 +51,11 @@ c       boxa,invboxa = the dimensions of the system frame
         real*8 delta,invdelta
         real*8 gr11(histbinmax),gr22(histbinmax),gr12(histbinmax)
         
-        common /part1/ x1,y1,fx1,fy1,vx1,vy1,theta1
-        common /part2/ x2,y2,fx2,fy2,vx2,vy2,theta2
+        common /part1/ x1,y1,fx1,fy1,vx1,vy1,theta1,newx
+        common /part2/ x2,y2,fx2,fy2,vx2,vy2,theta2,newy
         
         common /sys1/ dt,dia,kappa,contact,diffus,rotdiffus
-        common /sys2/ boxy,boxx,invboxy,invboxx,x01,y01,x02,y02,lattice
+        common /sys2/ boxy,boxx,radius,invboxy,invboxx,x01,y01,x02,y02,lattice,circ
         common /sys3/ counter1x,counter1y,counter2x,counter2y
         common /sys4/ seed1a,seed1b,seed1c,seed2a,seed2b,seed2c,seedcon
         

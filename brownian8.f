@@ -159,8 +159,14 @@ c               Produce radial distribution histogram data.
                 
                 do k=1,npart1
 c                   Calculate statistics of motion.
-                    deltax1=counter1x(k)*boxx+x1(k)-x01(k)
-                    deltay1=counter1y(k)*boxy+y1(k)-y01(k)
+                    if( circ .eq. 1) then
+c                     Don't need to worry about wrap in circular bounds
+                      deltax1=x1(k)-x01(k)
+                      deltay1=y1(k)-y01(k)
+                    else
+                      deltax1=counter1x(k)*boxx+x1(k)-x01(k)
+                      deltay1=counter1y(k)*boxy+y1(k)-y01(k)
+                    endif
                     sumsqrdis1=sumsqrdis1+deltax1*deltax1
                     sumsqrdis1=sumsqrdis1+deltay1*deltay1
                     vxave1=vxave1+vx1(k)
@@ -175,8 +181,14 @@ c                   Write position and velocity data per run.
                 
                 do k=1,npart2
 c                   Calculate statistics of motion.
-                    deltax2=counter2x(k)*boxx+x2(k)-x02(k)
-                    deltay2=counter2y(k)*boxy+y2(k)-y02(k)
+                    if( circ .eq. 1) then
+c                     Don't need to worry about wrap in circular bounds
+                      deltax2=x2(k)-x02(k)
+                      deltay2=y2(k)-y02(k)
+                    else
+                      deltax2=counter2x(k)*boxx+x2(k)-x02(k)
+                      deltay2=counter2y(k)*boxy+y2(k)-y02(k)
+                    endif
                     sumsqrdis2=sumsqrdis2+deltax2*deltax2
                     sumsqrdis2=sumsqrdis2+deltay2*deltay2
                     vxave2=vxave2+vx2(k)

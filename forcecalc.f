@@ -44,11 +44,12 @@ c               ...find the distance between the particles.
 c               For all particles within a given proximity...
                 if (dr .le. frange) then
 c                   ...find the forces.
-                    fscp=prescp1*forcescp(kappa,dr)
-                    fljp=preljp1*forceljp(dia,dr)
+c                    fscp=prescp1*forcescp(kappa,dr)
+c                    fljp=preljp1*forceljp(dia,dr)
                     frep=prerep1*forcerep(dia,dr)
-                    fadh=preadh1*forceadh(dia,contact,dr)
-                    netforces=fscp+fljp+frep+fadh
+c                    fadh=preadh1*forceadh(dia,contact,dr)
+c                    netforces=fscp+fljp+frep+fadh
+                    netforces=frep
                     
                     fx1(i)=fx1(i)+dx*netforces
                     fx1(j)=fx1(j)-dx*netforces

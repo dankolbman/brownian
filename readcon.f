@@ -12,6 +12,7 @@ c       ran2 = a uniformly-distributed random number generator
         include 'param'
         integer i
         real*8 sepx,sepy,alt,variance
+        real*8 r,phi
         real*8 ran2
         
         variance=0.05d0
@@ -19,21 +20,37 @@ c       ran2 = a uniformly-distributed random number generator
         if (lattice .eq. 2) then ! Random configuration
 c            Generate the initial positions of x and y.
             do i=1,npart1
-                x1(i)=ran2(seedcon)
-                y1(i)=ran2(seedcon)
-                
-                x1(i)=x1(i)*boxx
-                y1(i)=y1(i)*boxy
+                if( circ .eq. 1) then ! Circular bounds
+                  r=ran2(seedcon)*radius
+                  phi=ran2(seedcon)*2*pi
+                  
+                  x1(i)=r*cos(phi)
+                  y1(I)=r*sin(phi)
+                else
+                  x1(i)=ran2(seedcon)
+                  y1(i)=ran2(seedcon)
+                  
+                  x1(i)=x1(i)*boxx
+                  y1(i)=y1(i)*boxy
+                endif
             enddo
 
             do i=1,npart2
-                x2(i)=ran2(seedcon)
+                if( circ .eq. 1) then ! Circular bonuds
+                  r=ran2(seedcon)*radius
+                  phi=ran2(seedcon)*2*pi
+                  
+                  x2(i)=r*cos(phi)
+                  y2(I)=r*sin(phi)
+                else 
+                  x2(i)=ran2(seedcon)
 c                seedcon=seedcon+31
-                y2(i)=ran2(seedcon)
+                  y2(i)=ran2(seedcon)
 c                seedcon=seedcon+31
-                
-                x2(i)=x2(i)*boxx
-                y2(i)=y2(i)*boxy
+                  
+                  x2(i)=x2(i)*boxx
+                  y2(i)=y2(i)*boxy
+                endif
             enddo
         else if (lattice .eq. 1) then ! Displaced lattice configuration.
             call formlattice()
