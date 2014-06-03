@@ -23,8 +23,8 @@ c       boxa,invboxa = the dimensions of the system frame
         parameter(npart1=200,npart2=200)
         integer nequil,ncor,nitn,nrun
         parameter(nequil=1e4) ! 1e4
-        parameter(ncor=500) ! 50-500
-        parameter(nitn=5) ! 1-200
+        parameter(ncor=50) ! 50-500
+        parameter(nitn=1) ! 1-200
         parameter(nrun=1e3)
         real*8 pi,half
         parameter(pi=4.0d0*datan(1.0d0),half=0.5d0)
@@ -55,9 +55,10 @@ c       boxa,invboxa = the dimensions of the system frame
         common /part2/ x2,y2,fx2,fy2,vx2,vy2,theta2,newy
         
         common /sys1/ dt,dia,kappa,contact,diffus,rotdiffus
-        common /sys2/ boxy,boxx,radius,invboxy,invboxx,x01,y01,x02,y02,lattice,circ
+        common /sys2/ boxy,boxx,radius,invboxy,invboxx,x01,y01,x02,y02
         common /sys3/ counter1x,counter1y,counter2x,counter2y
         common /sys4/ seed1a,seed1b,seed1c,seed2a,seed2b,seed2c,seedcon
+        common /sys5/ lattice,circ
         
         common /mov1/ prescp1,preljp1,prerep1,preadh1
         common /mov2/ prescp2,preljp2,prerep2,preadh2

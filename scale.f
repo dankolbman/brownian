@@ -44,7 +44,7 @@ c       Set experimental parameters (in CGS units).
         seed2b=-111827837
         seed2c=-92733893 
         seedcon=-46766782
-        lattice=0 ! 0 = lattice, 1 = displaced lattice, 2 = random
+        lattice=2 ! 0 = lattice, 1 = displaced lattice, 2 = random
         circ=1  ! 0 = box bounds, 1 = circular bounds
 
         diffus=boltz*temp/(3.0d0*pi*eta*dia) ! cm**2/s
