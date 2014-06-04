@@ -56,6 +56,62 @@ c        write(*,*) nx,ny
         
  10     return
         end
+
+        subroutine circlattice()
+        include 'param'
+        integer i,j,k,npart,rem1,rem2,npt
+        real*8 lattspace,ang,cx,cy
+
+        npart=npart1+npart2
+        rem1=npart1-1
+        rem2=npart2
+        lattspace=radius/20.0
+        npt=1
+
+c       Current coords
+        cx=0
+        cy=0
+
+        x1(1)=0
+        y1(1)=0
+
+        do i=1,15 ! 10 hexagons
+          cx=lattspace*i
+          cy=0
+          ang=pi/3
+          do j=1,6 ! each point
+            ang=ang+pi/3
+            do k=1,i ! divide each side
+              if(npt .gt. npart) then
+                exit ! kill if no more particles
+              endif
+              !write(*,"('Placed: ',i4,' Total: ',i4)") npt,npart
+              if( dsqrt(cx**2+cy**2) .lt. radius) then
+                npt=npt+1
+c               Species 1
+                if((mod(npt,2) .eq. 1 .and. rem1 .gt. 0)
+     &            .or. rem2 .lt. 1) then
+                  x1((npt+1)/2)=cx
+                  y1((npt+1)/2)=cy
+                  rem1=rem1-1
+                else if((mod(npt,2) .eq. 0 .and. rem2 .gt. 0)
+     &            .or. rem1 .lt. 1) then
+                  x2((npt+1)/2)=cx
+                  y2((npt+1)/2)=cy
+                endif
+              endif
+c             Move to next
+              cx=cx+lattspace*cos(ang)
+              cy=cy+lattspace*sin(ang)
+            enddo
+          enddo
+        enddo
+
+        return
+        end
+            
+
+        
         
 c-----------------------------------------------------------------------
 

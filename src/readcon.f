@@ -71,8 +71,12 @@ c                seedcon=seedcon+31
                 y2(i)=y2(i)-boxy*floor(y2(i)*invboxy)
             enddo
         else ! Lattice configuration.
-            call formlattice()
-        endif
+            if(circ .eq. 1) then
+              call circlattice()
+            else
+              call formlattice()
+            endif
+       endif
         
         do i=1,npart1
             vx1(i)=0.0d0
