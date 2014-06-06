@@ -2,6 +2,7 @@
   Read and write operations for python scripts.
   
   readPos - Read position data
+  readMsdave - Read average mean squared displacement
   readGr - Read g(r) data
   readConf - Read system configuration data
   
@@ -17,7 +18,6 @@ def readPos(filen):
   """ readPos : String -> float[] float[]
   Read position data from a file and return x and y lists
   """
-
   xpos=[]
   ypos=[]
   try:
@@ -32,6 +32,24 @@ def readPos(filen):
   f.close()
   return xpos,ypos
 
+def readMsdave(filen):
+  """ readMsdave : String -> float[] float[]
+  Read averaged mean square displacement data and return time, msd data
+  """
+  time=[]
+  msd=[]
+  try:
+    f = open(filen)
+    for line in f:
+      l = line.split()
+      if len(l) < 4: break
+      time.append(float(l[2]))
+      msd.append(float(l[3]))
+  except IOError as e:
+    print('IO Error!', e.strerror)
+  f.close()
+  return time, msd
+
 def readGr(filen):
   """ readGr : String -> float[] float[]
   Reads radial distribution function data from file
@@ -44,8 +62,9 @@ def readGr(filen):
     f = open(filen)
     for line in f:
       l = line.split()
-      r.append(float(l[3]))
-      gr.append(float(l[4]))
+      if(len(l) >= 4):
+        r.append(float(l[3]))
+        gr.append(float(l[4]))
   except IOError as e:
     print('IO Error!', e.strerror)
   f.close()

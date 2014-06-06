@@ -1,5 +1,5 @@
 """
-  Utility for plotting radial distribution functions
+  Utility for plotting radial distribution functions.
   
   Dan Kolbman 2014
 """
@@ -12,28 +12,27 @@ import re
 import dataIO
 
 def plotGr(conf, arg):
-  """ plotGr : Dict -> None
-  Plots position data
+  """ plotGr : Dict String[] -> None
+  Plots the specified radial distribution files on a single plot
   """
-  fig = plt.figure()
   colors = ['r', 'g', 'b']
-  ax = fig.add_subplot(1,1,1)
-
-  for i in range(1,len(arg)):
+  for i in range(0,len(arg)):
     r, gr = dataIO.readGr(arg[i])
     # Line
-    ax.plot(r, gr, color=colors[(i-2)%3], label=str(i))
+    plt.plot(r, gr, color=colors[(i)%3], label=str(i))
     # Dots
-    #ax.plot(r, gr, 'o', color=colors[(i-2)%3], label=str(i))
-
-  plt.show()
+    #plot(r, gr, 'o', color=colors[(i)%3], label=str(i))
 
 
+"""
+  If called directly, only plot g(r)
+"""
 if __name__ == '__main__':
   if(len(sys.argv) < 3):
-    print('Correct usage: grplot sysparam.dat gr1.dat gr2.dat ...')
+    print('Correct usage: python grplot.py sysparam.dat gr1.dat gr2.dat ...')
   else:
     # Get the configuration variables
     conf = dataIO.readConf(sys.argv[1])
-    plotGr(conf, sys.argv)
+    plotGr(conf, sys.argv[2:])
+    plt.show()
   
