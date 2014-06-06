@@ -1,0 +1,5 @@
+*.dat
+*.swp
+*.o
+brownian
+__pycache__
