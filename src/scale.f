@@ -3,6 +3,8 @@ c
 c       Parameters:
 c       npart = the total number of particles in the system
 c       dielec = the relative permittivity of the system
+
+
 c       boltz = Boltzman's constant
 c       elcharge = the elementary charge of an electron
 c       temp = the temperature of the system
@@ -62,8 +64,8 @@ c       Lennard-Jones Potential
         epsilon2=0.0d0
         epsilon12=0.0d0
 c       Hookean Contact Repulsion (Soft <= ~0.01; Hard >= ~0.1)
-        repul1=0.31623d-2 ! (thermal energy unit / particle length unit)
-        repul2=1.0d-2
+        repul1=1.0d-2 !0.31623d-2 ! (thermal energy unit / particle length unit)
+        repul2=0.0d0 !1.0d-2
         repul12=2*repul1*repul2/(repul1+repul2) !*
 c       Contact Adhesion Force
         contact=0.05*dia
@@ -138,7 +140,7 @@ c       Record parameters.
         write(1,'(t5,a15,t34,e17.10)') 'Packing Frac = ',packing
         write(1,'(t5,a12,t34,e17.10)') 'Box Width = ',boxx
         write(1,'(t5,a13,t34,e17.10)') 'Box Height = ',boxy
-        write(1,'(t5,a13,t34,e17.10)') 'Boundary Radius= ',radius
+        write(1,'(t5,a13,t34,e17.10)') 'Circle Rad = ',radius
         write(1,'(t5,a15,t34,e17.10)') 'Packing Frac = ',packing
         write(1,'(t5,a12,t34,e17.10)') 'Time Unit = ',unittime
         write(1,'(t5,a14,t34,e17.10)') 'Length Unit = ',unitlength
@@ -146,8 +148,8 @@ c       Record parameters.
         write(1,*)
         write(1,*) 'Particle Parameters (de-dimensionalized):'
         write(1,'(t5,a11,t34,e17.10)') 'Diameter = ',dia
-        write(1,'(t5,a10,t34,i4)') 'Npart1 = ',npart1
-        write(1,'(t5,a10,t34,i4)') 'Npart2 = ',npart2
+        write(1,'(t5,a9,t34,i4)') 'Npart1 = ',npart1
+        write(1,'(t5,a9,t34,i4)') 'Npart2 = ',npart2
         write(1,'(t5,a10,t34,e17.10)') 'Charge1 = ',charge1
         write(1,'(t5,a10,t34,e17.10)') 'Charge2 = ',charge2
         write(1,'(t5,a11,t34,e17.10)') 'Epsilon1 = ',epsilon1

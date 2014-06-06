@@ -65,7 +65,7 @@ c        write(*,*) nx,ny
         npart=npart1+npart2
         rem1=npart1-1
         rem2=npart2
-        lattspace=radius/15.0
+        lattspace=radius/11.0
         npt=1
 
 c       Current coords

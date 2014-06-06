@@ -37,9 +37,11 @@ c       ...for each particle i, from each particle j...
             do j=i+1,npart1
 c               ...find the distance between the particles.
                 dx=x1(i)-x1(j)
-                dx=dx-boxx*anint(dx*invboxx)
                 dy=y1(i)-y1(j)
-                dy=dy-boxy*anint(dy*invboxy)
+                if(circ .eq. 0) then
+                  dx=dx-boxx*anint(dx*invboxx)
+                  dy=dy-boxy*anint(dy*invboxy)
+                endif
                 dr=dsqrt(dx*dx+dy*dy)
 c               For all particles within a given proximity...
                 if (dr .le. frange) then
@@ -65,9 +67,11 @@ c       ...for each particle i, from each particle j...
             do j=i+1,npart2
 c               ...find the distance between the particles.
                 dx=x2(i)-x2(j)
-                dx=dx-boxx*anint(dx*invboxx)
                 dy=y2(i)-y2(j)
-                dy=dy-boxy*anint(dy*invboxy)
+                if(circ .eq. 0) then
+                  dx=dx-boxx*anint(dx*invboxx)
+                  dy=dy-boxy*anint(dy*invboxy)
+                endif
                 dr=dsqrt(dx*dx+dy*dy)
 c               For all particles within a given proximity...
                 if (dr .le. frange) then
@@ -92,9 +96,11 @@ c       ...for each particle i, from each particle j...
             do j=1,npart2
 c               ...find the distance between the particles.
                 dx=x1(i)-x2(j)
-                dx=dx-boxx*anint(dx*invboxx)
                 dy=y1(i)-y2(j)
-                dy=dy-boxy*anint(dy*invboxy)
+                if(circ .eq. 0) then
+                  dx=dx-boxx*anint(dx*invboxx)
+                  dy=dy-boxy*anint(dy*invboxy)
+                endif
                 dr=dsqrt(dx*dx+dy*dy)
 c               For all particles within a given proximity...
                 if (dr .le. frange) then

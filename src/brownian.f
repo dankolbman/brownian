@@ -33,7 +33,7 @@ c       outfile,istring = strings for file naming
         include 'param'
         integer time(3)
         integer loading1,loading2
-        integer i,j,k
+        integer i,j,k,l
 c        real*8 rxold1(npart1),ryold1(npart1)
         real*8 meansqrdis1,sumsqrdis1,meansqrdis2,sumsqrdis2
         real*8 msdave1(nrun),msdave2(nrun)
@@ -76,6 +76,10 @@ c       Open data files.
             open(unit=2500+i,file=outfile,status='unknown')
             outfile='fgr12'//trim(adjustl(istring))//'.dat'
             open(unit=3000+i,file=outfile,status='unknown')
+            outfile='fpos1'//trim(adjustl(istring))//'.dat'
+            open(unit=3500+i,file=outfile,status='unknown')
+            outfile='fpos2'//trim(adjustl(istring))//'.dat'
+            open(unit=4000+i,file=outfile,status='unknown')
         enddo
         
         do i=1,nrun
@@ -111,6 +115,7 @@ c           Reset data for every trial.
             write(30,20)'% itn','run','time','vxave','vyave','vaverun'
             write(31,20)'% itn','run','time','vxave','vyave','vaverun'
             
+c           Save initial positions
             do j=1,npart1
                 x01(j)=x1(j)
                 y01(j)=y1(j)
@@ -242,15 +247,27 @@ c               Write radial distribution data.
      &                  delta),gr22(k)
                     write(16,30) i,j,(dfloat(j)*ncor*dt),(dfloat(k)*
      &                  delta),gr12(k)
-                    if(j.eq.nrun) then
-                      write(2000+i,30) i,j,(dfloat(j)*ncor*dt),
-     &                  (dfloat(k)*delta),gr11(k)
-                      write(2500+i,30) i,j,(dfloat(j)*ncor*dt),
-     &                  (dfloat(k)*delta),gr22(k)
-                      write(3000+i,30) i,j,(dfloat(j)*ncor*dt),
-     &                  (dfloat(k)*delta),gr12(k)
-                    endif
                 enddo
+
+c               Write final g(r) and positions for system
+                if(j.eq.nrun) then
+c                 g(r)
+                  do k=1,histbinmax
+                    write(2000+i,30) i,j,(dfloat(j)*ncor*dt),
+     &                  (dfloat(k)*delta),gr11(k)
+                    write(2500+i,30) i,j,(dfloat(j)*ncor*dt),
+     &                  (dfloat(k)*delta),gr22(k)
+                    write(3000+i,30) i,j,(dfloat(j)*ncor*dt),
+     &                  (dfloat(k)*delta),gr12(k)
+                  enddo
+c                 Positions
+                  do l=1,npart1
+                      write(3500+i,*) x1(l),y1(l)
+                  enddo
+                  do l=1,npart2
+                      write(4000+i,*) x2(l),y2(l)
+                  enddo
+                endif
                 
                 write(14,*)
                 write(14,*)
