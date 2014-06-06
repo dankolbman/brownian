@@ -65,7 +65,7 @@ c        write(*,*) nx,ny
         npart=npart1+npart2
         rem1=npart1-1
         rem2=npart2
-        lattspace=radius/20.0
+        lattspace=radius/15.0
         npt=1
 
 c       Current coords
@@ -75,7 +75,7 @@ c       Current coords
         x1(1)=0
         y1(1)=0
 
-        do i=1,15 ! 10 hexagons
+        do i=1,15 ! 15 hexagons
           cx=lattspace*i
           cy=0
           ang=pi/3
@@ -89,15 +89,14 @@ c       Current coords
               if( dsqrt(cx**2+cy**2) .lt. radius) then
                 npt=npt+1
 c               Species 1
-                if((mod(npt,2) .eq. 1 .and. rem1 .gt. 0)
-     &            .or. rem2 .lt. 1) then
-                  x1((npt+1)/2)=cx
-                  y1((npt+1)/2)=cy
+                if((mod(i,2).eq.0.or.rem2.lt.1).and.rem1.gt.0)then
+                  x1(npart1-rem1+1)=cx
+                  y1(npart1-rem1+1)=cy
                   rem1=rem1-1
-                else if((mod(npt,2) .eq. 0 .and. rem2 .gt. 0)
-     &            .or. rem1 .lt. 1) then
-                  x2((npt+1)/2)=cx
-                  y2((npt+1)/2)=cy
+                else if((mod(i,2).eq.1.or.rem1.lt.1).and.rem2.gt.0) then
+                  x2(npart2-rem2+1)=cx
+                  y2(npart2-rem2+1)=cy
+                  rem2=rem2-1
                 endif
               endif
 c             Move to next
@@ -109,10 +108,7 @@ c             Move to next
 
         return
         end
-            
 
-        
-        
 c-----------------------------------------------------------------------
 
 c       Generates a random number

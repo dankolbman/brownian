@@ -70,8 +70,12 @@ c       Open data files.
             open(unit=1100+i,file=outfile,status='unknown')
             outfile='config1'//trim(adjustl(istring))//'.dat'
             open(unit=1300+i,file=outfile,status='unknown')
-            outfile='config2'//trim(adjustl(istring))//'.dat'
-            open(unit=1500+i,file=outfile,status='unknown')
+            outfile='fgr11'//trim(adjustl(istring))//'.dat'
+            open(unit=2000+i,file=outfile,status='unknown')
+            outfile='fgr22'//trim(adjustl(istring))//'.dat'
+            open(unit=2500+i,file=outfile,status='unknown')
+            outfile='fgr12'//trim(adjustl(istring))//'.dat'
+            open(unit=3000+i,file=outfile,status='unknown')
         enddo
         
         do i=1,nrun
@@ -100,8 +104,8 @@ c           Reset data for every trial.
             meansqrdis2=0.0d0
             call grinit()
             
- 10         format(a5,t8,a3,t15,a4,t30,a24)
- 20         format(a5,t8,a3,t15,a4,t30,a5,t50,a5,t70,a7)
+ 10         format(a5,t8,a5,t15,a4,t30,a24)
+ 20         format(a5,t8,a5,t15,a4,t30,a5,t50,a5,t70,a7)
             write(10,10)'% itn','run','time','mean square displacement'
             write(11,10)'% itn','run','time','mean square displacement'
             write(30,20)'% itn','run','time','vxave','vyave','vaverun'
@@ -238,6 +242,14 @@ c               Write radial distribution data.
      &                  delta),gr22(k)
                     write(16,30) i,j,(dfloat(j)*ncor*dt),(dfloat(k)*
      &                  delta),gr12(k)
+                    if(j.eq.nrun) then
+                      write(2000+i,30) i,j,(dfloat(j)*ncor*dt),
+     &                  (dfloat(k)*delta),gr11(k)
+                      write(2500+i,30) i,j,(dfloat(j)*ncor*dt),
+     &                  (dfloat(k)*delta),gr22(k)
+                      write(3000+i,30) i,j,(dfloat(j)*ncor*dt),
+     &                  (dfloat(k)*delta),gr12(k)
+                    endif
                 enddo
                 
                 write(14,*)
