@@ -18,7 +18,7 @@ def plotMsd(conf, arg):
     # Line
     plt.plot(r, gr, color=colors[(i)%3], label=str(i))
     # Dots
-    plt.plot(r, gr, 'o', color=colors[(i)%3], label=str(i))
+    #plt.plot(r, gr, 'o', color=colors[(i)%3], label=str(i))
 
 """
   If called directly, only plot msd

@@ -11,6 +11,7 @@ import dataIO
 import grplot
 import msdplot
 import circplot
+import posplot
 import stats
 
 if __name__ == '__main__':
@@ -36,24 +37,27 @@ python fourplot.py sysparam.dat initpos.dat gr.dat finalpos.dat msd.dat')
   conf = dataIO.readConf(sys.argv[1])
   
   fig = plt.figure()
+  #fig.subplots_adjust(wspace=0.4,hspace=0.2)
 
   plt.suptitle(str(int(conf['npart1']))+' of Type 1, '\
-              +str(int(conf['npart2']))+' of Type 2',\
+              +str(int(conf['npart2']))+' of Type 2, '\
+              +str(int(conf['nrun']*conf['ncor']))+' iterations, '\
+              +str(int(conf['nitn']))+' trials',\
               fontsize=18)
 
   # Initial positions
-  fig.add_subplot(2,2,1)
-  circplot.plotSys(conf, ipos)
+  fig.add_subplot(2,2,1,aspect='equal')
+  posplot.plotSys(conf, ipos)
   fig.gca().set_title('Initial Configuration')
 
   # Radial Distribution
   fig.add_subplot(2,2,2)
   grplot.plotGr(conf, gr)
-  fig.gca().set_title('Radial Distribution')
+  fig.gca().set_title('Final Average Radial Distribution')
 
   # Final Positions
-  fig.add_subplot(2,2,3)
-  circplot.plotSys(conf, fpos)
+  fig.add_subplot(2,2,3,aspect='equal')
+  posplot.plotSys(conf, fpos)
   fig.gca().set_title('Final Configuration')
   
   # Mean square displacement
@@ -61,4 +65,8 @@ python fourplot.py sysparam.dat initpos.dat gr.dat finalpos.dat msd.dat')
   msdplot.plotMsd(conf, msd)
   fig.gca().set_title('Mean Square Displacement')
   
+  fig.tight_layout()
+  fig.subplots_adjust(top=0.88)
+  
+  plt.savefig('circ.png')
   plt.show()
