@@ -11,6 +11,7 @@ import dataIO
 import grplot
 import msdplot
 import circplot
+import stats
 
 if __name__ == '__main__':
   if(len(sys.argv) < 2):
@@ -20,13 +21,17 @@ python fourplot.py sysparam.dat initpos.dat gr.dat finalpos.dat msd.dat')
   elif(len(sys.argv) == 2):
     ipos = [ 'config11.dat' ]
     fpos = [ 'fpos11.dat', 'fpos21.dat' ]
-    gr = [ 'fgr111.dat' ]
+    gr = [ 'fgr11' ]
     msd = [ 'msdave1.dat' ]
   else:
     ipos = [ sys.argv[2] ]
     fpos = [ sys.argv[3] ]
     gr = [ sys.argv[4] ]
     msd = [ sys.argv[5] ]
+
+  # Compute average g(r)
+  stats.avgGr(gr[0], 'avggr.dat')
+  gr = [ 'avggr.dat' ]
 
   conf = dataIO.readConf(sys.argv[1])
   
