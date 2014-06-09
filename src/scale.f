@@ -141,6 +141,7 @@ c       Record parameters.
         write(1,'(t5,a12,t34,e17.10)') 'Box Width = ',boxx
         write(1,'(t5,a13,t34,e17.10)') 'Box Height = ',boxy
         write(1,'(t5,a13,t34,e17.10)') 'Circle Rad = ',radius
+        write(1,'(t5,a13,t34,e17.10)') 'Circ = ',circ
         write(1,'(t5,a15,t34,e17.10)') 'Packing Frac = ',packing
         write(1,'(t5,a12,t34,e17.10)') 'Time Unit = ',unittime
         write(1,'(t5,a14,t34,e17.10)') 'Length Unit = ',unitlength
