@@ -33,10 +33,13 @@ c           Set the origin.
             do j=i+1,npart1
 c               Get the distance from the origin of each particle.
                 dx=x1orig-x1(j)
-!                write(*,*) i,j,x1orig,x1(j)
-                dx=dx-boxx*anint(dx*invboxx)
                 dy=y1orig-y1(j)
-                dy=dy-boxy*anint(dy*invboxy)
+!                write(*,*) i,j,x1orig,x1(j)
+c               Do periodic boundaries
+                if(circ .eq. 0) then
+                  dx=dx-boxx*anint(dx*invboxx)
+                  dy=dy-boxy*anint(dy*invboxy)
+                endif
                 dr=dsqrt(dx**2+dy**2)
 c               Convert the radial distances into an array index.
                 indexr=int(dr*invdelta)+1
@@ -55,9 +58,11 @@ c           Set the origin.
             do j=i+1,npart2
 c               Get the distance from the origin of each particle.
                 dx=x2orig-x2(j)
-                dx=dx-boxx*anint(dx*invboxx)
                 dy=y2orig-y2(j)
-                dy=dy-boxy*anint(dy*invboxy)
+                if(circ .eq. 0) then
+                  dx=dx-boxx*anint(dx*invboxx)
+                  dy=dy-boxy*anint(dy*invboxy)
+                endif
                 dr=dsqrt(dx**2+dy**2)
 c               Convert the radial distances into an array index.
                 indexr=int(dr*invdelta)+1
@@ -76,9 +81,11 @@ c           Set the origin.
             do j=1,npart2
 c               Get the distance from the origin of each particle.
                 dx=x1orig-x2(j)
-                dx=dx-boxx*anint(dx*invboxx)
                 dy=y1orig-y2(j)
-                dy=dy-boxy*anint(dy*invboxy)
+                if(circ .eq. 0) then
+                  dx=dx-boxx*anint(dx*invboxx)
+                  dy=dy-boxy*anint(dy*invboxy)
+                endif
                 dr=dsqrt(dx**2+dy**2)
 c               Convert the radial distances into an array index.
                 indexr=int(dr*invdelta)+1
