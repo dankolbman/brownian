@@ -15,32 +15,49 @@ def plotSys(conf, arg):
   colors = ['r', 'g', 'b']
 
   for i in range(0,len(arg)):
+    fig = plt.gcf()
+    ax = fig.gca()
     xpos, ypos = dataIO.readPos(arg[i])
-    s = [conf['diameter']**2/4*3.1415 for i in range(len(xpos))]
-    plt.scatter(xpos, ypos, s=s,color=colors[(i)%3])
+    circleScatter(xpos, ypos, ax,\
+            radius=conf['diameter']/2,\
+            color=colors[i%len(colors)])
+    #s = [conf['diameter']**2/4*3.1415 for i in range(len(xpos))]
+    #plt.scatter(xpos, ypos, s=s,color=colors[(i)%3])
 
-  width = conf['boxwidth']
-  height = conf['boxheight']
-  plt.ylim( (0-height*0.1, height*1.1) )
-  plt.xlim( (0-width*0.1, width*1.1) )
-  box = plt.Rectangle((0,0), width, height)
-  box.fill = False
-  fig = plt.gcf()
-  fig.gca().add_artist(box)
-  """  
-  # Radius of boundary
-  rad = conf['circlerad']
+  plotBounds(conf, plt.gcf().gca())
 
-  # Draw everything
-  #ax = plt.add_subplot(1, 1, 1)
-  plt.ylim( (-rad*1.1, rad*1.1) )
-  plt.xlim( (-rad*1.1, rad*1.1) )
-  circ = plt.Circle((0, 0), radius=conf['circlerad'])
-  circ.fill = False
-  # Add to current figure
-  fig = plt.gcf()
-  fig.gca().add_artist(circ)
+
+def plotBounds(conf, axes):
+  """ plotBounds : Dict Axes -> True
+  Makes a rectangle or circle depending on the geometry of the boundary
   """
+  # Rectangle
+  if(conf['circ'] == 0):
+    width = conf['boxwidth']
+    height = conf['boxheight']
+    plt.ylim( (0-height*0.1, height*1.1) )
+    plt.xlim( (0-width*0.1, width*1.1) )
+    shape = plt.Rectangle((0,0), width, height)
+  else:
+    rad = conf['circlerad']
+    plt.ylim( (-rad*1.1, rad*1.1) )
+    plt.xlim( (-rad*1.1, rad*1.1) )
+    shape = plt.Circle((0, 0), radius=conf['circlerad'])
+
+  shape.fill = False
+  axes.add_artist(shape)
+  return True
+  
+
+def circleScatter(xpos, ypos, axes, **kwargs):
+  """ circleScatter : float[] float[] -> True
+  Creates a scatter plot of circles
+  """
+  for x,y in zip(xpos, ypos):
+    circle = plt.Circle((x,y), **kwargs)
+    axes.add_patch(circle)
+
+  return True
 
 
 """
