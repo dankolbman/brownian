@@ -45,7 +45,7 @@ c             Propose new coords
               newx=x1(i)+dt*vx1(i)
               newy=y1(i)+dt*vy1(i)
 c             Accept move if within the bounds
-              if( dsqrt(newx**2 + newy**2) .lt. radius ) then
+              if( dsqrt(newx**2 + newy**2) .lt. radius-dia/2.0 ) then
                 x1(i)=newx
                 y1(i)=newy
               endif
@@ -84,7 +84,7 @@ c             Propose new coords
               newx=x2(i)+dt*vx2(i)
               newy=y2(i)+dt*vy2(i)
 c             Accept move if within the bounds
-              if( dsqrt(newx**2 + newy**2) .lt. radius ) then
+              if( dsqrt(newx**2 + newy**2) .lt. radius-dia/2.0 ) then
                 x2(i)=newx
                 y2(i)=newy
               endif
