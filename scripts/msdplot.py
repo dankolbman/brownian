@@ -4,6 +4,7 @@
   Dan Kolbman 2014
 """
 import matplotlib.pyplot as plt
+import numpy as np
 import sys
 
 import dataIO
@@ -14,11 +15,24 @@ def plotMsd(conf, arg):
   """
   colors = ['r', 'g', 'b']
   for i in range(0,len(arg)):
-    r, gr = dataIO.readMsdave(arg[i])
+    t, msd = dataIO.readMsdave(arg[i])
     # Line
-    plt.plot(r, gr, color=colors[(i)%3], label=str(i))
+    plt.plot(t, msd, color=colors[(i)%3], label=str(i))
     # Dots
-    #plt.plot(r, gr, 'o', color=colors[(i)%3], label=str(i))
+    #plt.plot(t, msd, 'o', color=colors[(i)%3], label=str(i))
+    # Current axes
+    ax = plt.gcf().gca()
+    # Linear fit
+    slope,intercept=np.polyfit(t,msd,1)
+    # Put fit on graph
+    plt.text(0.1, 0.9-i*0.05,\
+      'Slope: '+str(slope),\
+      transform = ax.transAxes)
+  # Titles
+  plt.gcf().gca().set_title('Mean Square Displacement')
+  plt.xlabel('Time')
+  plt.ylabel('MSD')
+
 
 """
   If called directly, only plot msd
@@ -30,5 +44,6 @@ if __name__ == '__main__':
     # Get the configuration variables
     conf = dataIO.readConf(sys.argv[1])
     plotMsd(conf, sys.argv[2:])
+    plt.savefig('msd.png')
     plt.show()
   

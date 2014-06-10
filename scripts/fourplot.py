@@ -10,7 +10,6 @@ import sys
 import dataIO
 import grplot
 import msdplot
-import circplot
 import posplot
 import stats
 

@@ -23,6 +23,9 @@ def plotGr(conf, arg):
     # Dots
     #plot(r, gr, 'o', color=colors[(i)%3], label=str(i))
 
+  plt.xlabel('r')
+  plt.ylabel('g(r)')
+
 
 """
   If called directly, only plot g(r)
