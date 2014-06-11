@@ -36,11 +36,9 @@ c           fluctuations do not contribute during equilibriation.
             ranr = pretrad*normb
             phi = pi*ran1(seed1c)
             vx1(i)=dfloat(1-equil)*vprop1*dcos(theta1(i))+fx1(i)+
-     &          dfloat(1-equil)*ranr*dcos(phi)
-c     &          dfloat(1-equil)*pretrad*normb
+     &          dfloat(1-equil)*pretrad*normb
            vy1(i)=dfloat(1-equil)*vprop1*dsin(theta1(i))+fy1(i)+
-     &          dfloat(1-equil)*ranr*dsin(phi)
-c     &          dfloat(1-equil)*pretrad*normc
+     &          dfloat(1-equil)*pretrad*normc
 
 c           Circular conditions
             if(circ .eq. 1) then
@@ -79,11 +77,9 @@ c           fluctuations do not contribute during equilibriation.
             ranr = pretrad*normb
             phi = pi*ran1(seed1c)
             vx2(i)=dfloat(1-equil)*vprop2*dcos(theta2(i))+fx2(i)+
-     &          dfloat(1-equil)*ranr*dcos(phi)
-c     &          dfloat(1-equil)*pretrad*normb
+     &          dfloat(1-equil)*pretrad*normb
             vy2(i)=dfloat(1-equil)*vprop2*dsin(theta2(i))+fy2(i)+
-     &          dfloat(1-equil)*ranr*dcos(phi)
-c     &          dfloat(1-equil)*pretrad*normc
+     &          dfloat(1-equil)*pretrad*normc
 c           Circular conditions
             if(circ .eq. 1) then
 c             Propose new coords
