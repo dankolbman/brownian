@@ -222,10 +222,10 @@ c                   Write position and velocity data per run.
                 write(1100+i,*)
                 
 c               Calculate mean square displacement.
-                meansqrdis1=sumsqrdis1/dfloat(npart1*ncor)
+                meansqrdis1=sumsqrdis1/dfloat(npart1)
                 msdave1(j)=msdave1(j)+meansqrdis1
                 write(10,50) i,j,dfloat(j)*ncor*dt,meansqrdis1
-                meansqrdis2=sumsqrdis2/dfloat(npart2*ncor)
+                meansqrdis2=sumsqrdis2/dfloat(npart2)
                 msdave2(j)=msdave2(j)+meansqrdis2
                 write(11,50) i,j,dfloat(j)*ncor*dt,meansqrdis2
  50             format(i3,t8,i3,t14,e12.5,t29,e12.5)
