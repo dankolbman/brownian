@@ -51,7 +51,6 @@ c       Set experimental parameters (in CGS units).
 
         diffus=boltz*temp/(3.0d0*pi*eta*dia) ! cm**2/s
         rotdiffus=500*boltz*temp/(pi*eta*dia*dia*dia) ! 1/s !*
-        
 c       Set interaction parameters (dimensionless).
 c       Screened Coulomb Potential
         kappa=0.5d0 ! 1/cm
@@ -64,16 +63,16 @@ c       Lennard-Jones Potential
         epsilon2=0.0d0
         epsilon12=0.0d0
 c       Hookean Contact Repulsion (Soft <= ~0.01; Hard >= ~0.1)
-        repul1=1.0d-2 !0.31623d-2 ! (thermal energy unit / particle length unit)
+        repul1=0.0d0 !1.0d-2 !0.31623d-2 ! (thermal energy unit / particle length unit)
         repul2=0.0d0 !1.0d-2
-        repul12=2*repul1*repul2/(repul1+repul2) !*
+        repul12=0.0d0 !2*repul1*repul2/(repul1+repul2) !*
 c       Contact Adhesion Force
         contact=0.05*dia
         adhesion1=0.0d0 ! (thermal energy unit / particle length unit)
         adhesion2=0.0d0
         adhesion12=0.0d0
 c       Self-Propulsion Speed
-        vprop1=1.0d2 ! (particle length unit / diffusion time unit)
+        vprop1=0.0d0 !1.0d2 ! (particle length unit / diffusion time unit)
         vprop2=1.0d2
         
 c       Set dimensionless units.
@@ -141,7 +140,7 @@ c       Record parameters.
         write(1,'(t5,a12,t34,e17.10)') 'Box Width = ',boxx
         write(1,'(t5,a13,t34,e17.10)') 'Box Height = ',boxy
         write(1,'(t5,a13,t34,e17.10)') 'Circle Rad = ',radius
-        write(1,'(t5,a13,t34,e17.10)') 'Circ = ',circ
+        write(1,'(t5,a10,t34,i6)') 'Circ = ',circ
         write(1,'(t5,a15,t34,e17.10)') 'Packing Frac = ',packing
         write(1,'(t5,a12,t34,e17.10)') 'Time Unit = ',unittime
         write(1,'(t5,a14,t34,e17.10)') 'Length Unit = ',unitlength
