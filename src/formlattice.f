@@ -59,14 +59,29 @@ c        write(*,*) nx,ny
 
         subroutine circlattice()
         include 'param'
-        integer i,j,k,npart,rem1,rem2,npt
+        integer i,j,k,npart,rem1,rem2,npt,N,nhex
         real*8 lattspace,ang,cx,cy
 
         npart=npart1+npart2
         rem1=npart1-1
         rem2=npart2
-        lattspace=radius/11.0
+        !lattspace=radius/11.0
         npt=1
+
+c       Number of hexagons
+        nhex = 0
+c       Number of particles that can fit
+        N = 1
+
+c       Determine number of hexagons needed
+        do while (N < npart)
+          nhex = nhex+1
+          N = N + nhex*6
+        enddo
+        nhex=nhex
+
+c       Scale spacing to use all space
+        lattspace=radius*2/(dfloat(nhex*2+1))
 
 c       Current coords
         cx=0
@@ -75,7 +90,7 @@ c       Current coords
         x1(1)=0
         y1(1)=0
 
-        do i=1,15 ! 15 hexagons
+        do i=1,nhex
           cx=lattspace*i
           cy=0
           ang=pi/3
@@ -86,7 +101,7 @@ c       Current coords
                 exit ! kill if no more particles
               endif
               !write(*,"('Placed: ',i4,' Total: ',i4)") npt,npart
-              if( dsqrt(cx**2+cy**2) .lt. radius) then
+              if( dsqrt(cx**2+cy**2) .lt. radius-dia/2.0) then
                 npt=npt+1
 c               Species 1
                 if((mod(i,2).eq.0.or.rem2.lt.1).and.rem1.gt.0)then
@@ -105,6 +120,7 @@ c             Move to next
             enddo
           enddo
         enddo
+        write(*,*) 'PARTICLES',npt
 
         return
         end
