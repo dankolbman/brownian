@@ -97,7 +97,7 @@ c       Current coords
           do j=1,6 ! each point
             ang=ang+pi/3
             do k=1,i ! divide each side
-              if(npt .gt. npart) then
+              if(npt .eq. npart) then
                 exit ! kill if no more particles
               endif
               !write(*,"('Placed: ',i4,' Total: ',i4)") npt,npart
@@ -120,7 +120,6 @@ c             Move to next
             enddo
           enddo
         enddo
-        write(*,*) 'PARTICLES',npt
 
         return
         end
