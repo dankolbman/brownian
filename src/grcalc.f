@@ -29,24 +29,25 @@ c       For 1-1 particle distributions:
 c           Set the origin.
             x1orig=x1(i)
             y1orig=y1(i)
-            
-            do j=i+1,npart1
+            if(dsqrt(x1orig*x1orig+y1orig*y1orig) .lt. radius/2.0) then
+              do j=i+1,npart1
 c               Get the distance from the origin of each particle.
-                dx=x1orig-x1(j)
-                dy=y1orig-y1(j)
+                  dx=x1orig-x1(j)
+                  dy=y1orig-y1(j)
 !                write(*,*) i,j,x1orig,x1(j)
-c               Do periodic boundaries
-                if(circ .eq. 0) then
-                  dx=dx-boxx*anint(dx*invboxx)
-                  dy=dy-boxy*anint(dy*invboxy)
-                endif
-                dr=dsqrt(dx**2+dy**2)
-c               Convert the radial distances into an array index.
-                indexr=int(dr*invdelta)+1
-c               Add to the histograms.
-                if (indexr .le. histbinmax)
+c                 Do periodic boundaries
+                  if(circ .eq. 0) then
+                    dx=dx-boxx*anint(dx*invboxx)
+                    dy=dy-boxy*anint(dy*invboxy)
+                  endif
+                  dr=dsqrt(dx**2+dy**2)
+c                 Convert the radial distances into an array index.
+                  indexr=int(dr*invdelta)+1
+c                 Add to the histograms.
+                  if (indexr .le. histbinmax .and. dr .lt. radius/2.0)
      &              histr11(indexr)=histr11(indexr)+2.0
-            enddo
+              enddo
+            endif
         enddo
         
 c       For 2-2 particle distributions:
@@ -54,22 +55,23 @@ c       For 2-2 particle distributions:
 c           Set the origin.
             x2orig=x2(i)
             y2orig=y2(i)
-            
-            do j=i+1,npart2
+            if(dsqrt(x2orig*x2orig+y2orig*y2orig) .lt. radius/2.0) then
+              do j=i+1,npart2
 c               Get the distance from the origin of each particle.
-                dx=x2orig-x2(j)
-                dy=y2orig-y2(j)
-                if(circ .eq. 0) then
-                  dx=dx-boxx*anint(dx*invboxx)
-                  dy=dy-boxy*anint(dy*invboxy)
-                endif
-                dr=dsqrt(dx**2+dy**2)
+                  dx=x2orig-x2(j)
+                  dy=y2orig-y2(j)
+                  if(circ .eq. 0) then
+                    dx=dx-boxx*anint(dx*invboxx)
+                    dy=dy-boxy*anint(dy*invboxy)
+                  endif
+                  dr=dsqrt(dx**2+dy**2)
 c               Convert the radial distances into an array index.
-                indexr=int(dr*invdelta)+1
+                  indexr=int(dr*invdelta)+1
 c               Add to the histograms.
-                if (indexr .le. histbinmax)
+                  if (indexr .le. histbinmax .and. dr .lt. radius/2.0)
      &              histr22(indexr)=histr22(indexr)+2.0
-            enddo
+              enddo
+            endif
         enddo
         
 c       For 1-2 particle distributions:
