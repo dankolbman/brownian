@@ -21,7 +21,7 @@ c       ran2 = a uniformly-distributed random number generator
 c            Generate the initial positions of x and y.
             do i=1,npart1
                 if( circ .eq. 1) then ! Circular bounds
-                  r=dsqrt(mod(ran2(seedcon),1.0))*radius
+                  r=dsqrt(mod(ran2(seedcon),1.0))*(radius-dia/2.0)
                   phi=ran2(seedcon)*2*pi
                   
                   x1(i)=r*cos(phi)
@@ -37,7 +37,7 @@ c            Generate the initial positions of x and y.
 
             do i=1,npart2
                 if( circ .eq. 1) then ! Circular bonuds
-                  r=dsqrt(mod(ran2(seedcon),1.0))*radius
+                  r=dsqrt(mod(ran2(seedcon),1.0))*(radius-dia/2.0)
                   phi=ran2(seedcon)*2*pi
                   
                   x2(i)=r*cos(phi)
