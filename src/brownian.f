@@ -70,6 +70,8 @@ c       Open data files.
             open(unit=1100+i,file=outfile,status='unknown')
             outfile='config1'//trim(adjustl(istring))//'.dat'
             open(unit=1300+i,file=outfile,status='unknown')
+            outfile='config2'//trim(adjustl(istring))//'.dat'
+            open(unit=1500+i,file=outfile,status='unknown')
             outfile='fgr11'//trim(adjustl(istring))//'.dat'
             open(unit=2000+i,file=outfile,status='unknown')
             outfile='fgr22'//trim(adjustl(istring))//'.dat'
