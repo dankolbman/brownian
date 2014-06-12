@@ -33,11 +33,9 @@ c           Calculate particle velocity.
 c           Here, during equilibriation, equil=1, and during motion-
 c           tracking, equil=0. Therefore, self-propulsion and thermal 
 c           fluctuations do not contribute during equilibriation.
-            ranr = pretrad*normb
-            phi = pi*ran1(seed1c)
             vx1(i)=dfloat(1-equil)*vprop1*dcos(theta1(i))+fx1(i)+
      &          dfloat(1-equil)*pretrad*normb
-           vy1(i)=dfloat(1-equil)*vprop1*dsin(theta1(i))+fy1(i)+
+            vy1(i)=dfloat(1-equil)*vprop1*dsin(theta1(i))+fy1(i)+
      &          dfloat(1-equil)*pretrad*normc
 
 c           Circular conditions
@@ -74,8 +72,6 @@ c           Calculate particle velocity.
 c           Here, during equilibriation, equil=1, and during motion-
 c           tracking, equil=0. Therefore, self-propulsion and thermal 
 c           fluctuations do not contribute during equilibriation.
-            ranr = pretrad*normb
-            phi = pi*ran1(seed1c)
             vx2(i)=dfloat(1-equil)*vprop2*dcos(theta2(i))+fx2(i)+
      &          dfloat(1-equil)*pretrad*normb
             vy2(i)=dfloat(1-equil)*vprop2*dsin(theta2(i))+fy2(i)+
