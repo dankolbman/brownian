@@ -18,9 +18,10 @@ OBJECTS = grcalc.o grinit.o scale.o formlattice.o movepart.o readcon.o forcecalc
 all: brownian
 
 brownian: $(OBJECTS)
+	mkdir -p $(BINDIR)
 	$(FC) $(OBJECTS) -o $(BINDIR)$(NAME)
 
-%.o: %.f
+%.o: %.f param
 	$(FC) $(FLAGS) -c $<
 
 clean:

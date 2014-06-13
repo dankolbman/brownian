@@ -19,10 +19,10 @@ if __name__ == '__main__':
 python fourplot.py sysparam.dat initpos.dat gr.dat finalpos.dat msd.dat')
     exit()
   elif(len(sys.argv) == 2):
-    ipos = [ 'config11.dat' ]
+    ipos = [ 'config11.dat','config21.dat' ]
     fpos = [ 'fpos11.dat', 'fpos21.dat' ]
-    gr = [ 'fgr11' ]
-    msd = [ 'msdave1.dat' ]
+    gr = [ 'fgr11', 'fgr22' ]
+    msd = [ 'msdave1.dat', 'msdave2.dat' ]
   else:
     ipos = [ sys.argv[2] ]
     fpos = [ sys.argv[3] ]
@@ -30,8 +30,9 @@ python fourplot.py sysparam.dat initpos.dat gr.dat finalpos.dat msd.dat')
     msd = [ sys.argv[5] ]
 
   # Compute average g(r)
-  stats.avgGr(gr[0], 'avggr.dat')
-  gr = [ 'avggr.dat' ]
+  stats.avgGr(gr[0], 'avggr1.dat')
+  stats.avgGr(gr[1], 'avggr2.dat')
+  gr = [ 'avggr1.dat', 'avggr2.dat' ]
 
   conf = dataIO.readConf(sys.argv[1])
   

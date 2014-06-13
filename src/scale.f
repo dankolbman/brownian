@@ -63,16 +63,16 @@ c       Lennard-Jones Potential
         epsilon2=0.0d0
         epsilon12=0.0d0
 c       Hookean Contact Repulsion (Soft <= ~0.01; Hard >= ~0.1)
-        repul1=0.0d0 !1.0d-2 !0.31623d-2 ! (thermal energy unit / particle length unit)
-        repul2=0.0d0 !1.0d-2
-        repul12=0.0d0 !2*repul1*repul2/(repul1+repul2) !*
+        repul1=1.0d-2 !0.31623d-2 ! (thermal energy unit / particle length unit)
+        repul2=1.0d-2
+        repul12=2*repul1*repul2/(repul1+repul2) !*
 c       Contact Adhesion Force
         contact=0.05*dia
         adhesion1=0.0d0 ! (thermal energy unit / particle length unit)
         adhesion2=0.0d0
         adhesion12=0.0d0
 c       Self-Propulsion Speed
-        vprop1=0.0d0 !1.0d2 ! (particle length unit / diffusion time unit)
+        vprop1=1.0d2 ! (particle length unit / diffusion time unit)
         vprop2=1.0d2
         
 c       Set dimensionless units.
