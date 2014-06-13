@@ -1,0 +1,46 @@
+ Technical Parameters:
+     nequil =                         1
+       ncor =                     10000
+       nitn =                         3
+       nrun =                       100
+
+ Experimental Parameters (de-dimensionalized):
+    Temperature =                 0.2980000000E+03
+    Diffusion =                   0.1000000000E+01
+    Angular Diffusion =           0.5342741340E+03
+    Time Step =                   0.3561827560E-06
+    Packing Frac =                0.4000000000E+00
+    Box Width =                   0.2608016031E+02
+    Box Height =                  0.3011477515E+02
+    Circle Rad =                  0.1581138830E+02
+       Circ =                         1
+    Packing Frac =                0.4000000000E+00
+    Time Unit =                   0.2807547483E+01
+    Length Unit =                 0.1070000000E-03
+    Energy Unit =                 0.4112400000E-13
+
+ Particle Parameters (de-dimensionalized):
+    Diameter =                    0.1000000000E+01
+    Npart1 =                      200
+    Npart2 =                      200
+    Charge1 =                     0.0000000000E+00
+    Charge2 =                     0.0000000000E+00
+    Epsilon1 =                    0.0000000000E+00
+    Epsilon2 =                    0.0000000000E+00
+    Repul1 =                      0.1000000000E-01
+    Repul2 =                      0.1000000000E-01
+    Vprop1 =                      0.1000000000E+03
+    Vprop2 =                      0.9499999881E+02
+
+ Calculated Force Coefficients (de-dimensionalized):
+    Prescp1 =                     0.0000000000E+00
+    Prescp2 =                     0.0000000000E+00
+    Prescp12 =                    0.0000000000E+00
+    Preljp1 =                     0.0000000000E+00
+    Preljp2 =                     0.0000000000E+00
+    Preljp12 =                    0.0000000000E+00
+    Prerep1 =                     0.9345794393E+02
+    Prerep2 =                     0.9345794393E+02
+    Prerep12 =                    0.9345794393E+02
+    Pretrad =                     0.2369619160E+04
+    Prerotd =                     0.1950893301E-01
