@@ -24,7 +24,7 @@ c       boxa,invboxa = the dimensions of the system frame
         integer nequil,ncor,nitn,nrun
         parameter(nequil=1e0) ! 1e4
         parameter(ncor=3e2) ! 50-500
-        parameter(nitn=5) ! 1-200
+        parameter(nitn=10) ! 1-200
         parameter(nrun=1e4)
 c       Total number of steps = ncor*nrun
         real*8 pi,half

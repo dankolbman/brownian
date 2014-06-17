@@ -65,7 +65,7 @@ c       Lennard-Jones Potential
 c       Hookean Contact Repulsion (Soft <= ~0.01; Hard >= ~0.1)
         repul1=0.0 !1.0d-2 !0.31623d-2 ! (thermal energy unit / particle length unit)
         repul2=0.0 !repul1
-        repul12=2*repul1*repul2/(repul1+repul2) !*
+        repul12=0.0 !2*repul1*repul2/(repul1+repul2) !*
 c       Contact Adhesion Force
         contact=0.05*dia
         adhesion1=0.0d0 ! (thermal energy unit / particle length unit)
