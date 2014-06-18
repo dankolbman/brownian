@@ -154,6 +154,10 @@ c       Record parameters.
         write(1,'(t5,a10,t34,e17.10)') 'Charge2 = ',charge2
         write(1,'(t5,a11,t34,e17.10)') 'Epsilon1 = ',epsilon1
         write(1,'(t5,a11,t34,e17.10)') 'Epsilon2 = ',epsilon2
+        write(1,'(t5,a9,t34,e17.10)') 'Contact = ',contact
+        write(1,'(t5,a9,t34,e17.10)') 'Adhesion1 = ',adhesion1
+        write(1,'(t5,a9,t34,e17.10)') 'Adhesion2 = ',adhesion2
+        write(1,'(t5,a9,t34,e17.10)') 'Adhesion12 = ',adhesion1
         write(1,'(t5,a9,t34,e17.10)') 'Repul1 = ',repul1
         write(1,'(t5,a9,t34,e17.10)') 'Repul2 = ',repul2
         write(1,'(t5,a9,t34,e17.10)') 'Vprop1 = ',vprop1
