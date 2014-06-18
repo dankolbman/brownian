@@ -67,8 +67,8 @@ c       Hookean Contact Repulsion (Soft <= ~0.01; Hard >= ~0.1)
         repul2=0.0 !repul1
         repul12=0.0 !2*repul1*repul2/(repul1+repul2) !*
 c       Contact Adhesion Force
-        contact=0.05*dia
-        adhesion1=0.0d0 ! (thermal energy unit / particle length unit)
+        contact=0.1*dia
+        adhesion1=1d-1 ! (thermal energy unit / particle length unit)
         adhesion2=0.0d0
         adhesion12=0.0d0
 c       Self-Propulsion Speed
@@ -79,7 +79,7 @@ c       Set dimensionless units.
         unittime=dia*dia/diffus
         unitlength=dia
         unitenergy=boltz*temp
-        
+        rotdiffus=rotdiffus*unittime
 c       Nondimensionalize parameters.
         diffus=diffus*unittime/(unitlength*unitlength)
         dia=dia/unitlength

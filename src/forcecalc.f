@@ -49,9 +49,9 @@ c                   ...find the forces.
 c                    fscp=prescp1*forcescp(kappa,dr)
 c                    fljp=preljp1*forceljp(dia,dr)
                     frep=prerep1*forcerep(dia,dr)
-c                    fadh=preadh1*forceadh(dia,contact,dr)
+                    fadh=preadh1*forceadh(dia,contact,dr)
 c                    netforces=fscp+fljp+frep+fadh
-                    netforces=frep
+                    netforces=frep+fadh
                     
                     fx1(i)=fx1(i)+dx*netforces
                     fx1(j)=fx1(j)-dx*netforces
@@ -161,11 +161,12 @@ c-----------------------------------------------------------------------
         function forceadh(dia,contact,dr)
         real*8 forceadh
         real*8 dia,contact,dr
-        real*8 x
+        real*8 x,y,z,half
+        parameter(half=0.5d0)
         
-        !* False! This is the potential energy, not the force.
-        x=dabs(dr-dia)-contact
-        forceadh=(x-dabs(x))/2.0d0/dr
-        
+        x=dr-dia
+        y=x-contact
+        z=half*(((dabs(x)/x)-((dabs(y)-y)/y)))
+        forceadh=z*((dia/dr)-1.0d0)
         return
         end
