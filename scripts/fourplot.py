@@ -19,10 +19,10 @@ if __name__ == '__main__':
 python fourplot.py sysparam.dat initpos.dat gr.dat finalpos.dat msd.dat')
     exit()
   elif(len(sys.argv) == 2):
-    ipos = [ 'config11.dat','config21.dat' ]
-    fpos = [ 'fpos11.dat', 'fpos21.dat' ]
-    gr = [ 'fgr11', 'fgr22' ]
-    msd = [ 'msdave1.dat', 'msdave2.dat' ]
+    ipos = [ 'config11.dat' ]
+    fpos = [ 'fpos11.dat']
+    gr = [ 'fgr11']
+    msd = [ 'msdave1.dat']
   else:
     ipos = [ sys.argv[2] ]
     fpos = [ sys.argv[3] ]
@@ -31,8 +31,8 @@ python fourplot.py sysparam.dat initpos.dat gr.dat finalpos.dat msd.dat')
 
   # Compute average g(r)
   stats.avgGr(gr[0], 'avggr1.dat')
-  stats.avgGr(gr[1], 'avggr2.dat')
-  gr = [ 'avggr1.dat', 'avggr2.dat' ]
+  #stats.avgGr(gr[1], 'avggr2.dat')
+  gr = [ 'avggr1.dat' ]
 
   conf = dataIO.readConf(sys.argv[1])
   
@@ -40,10 +40,14 @@ python fourplot.py sysparam.dat initpos.dat gr.dat finalpos.dat msd.dat')
   #fig.subplots_adjust(wspace=0.4,hspace=0.2)
 
   plt.suptitle(str(int(conf['npart1']))+' of Type 1, '\
-              +str(int(conf['npart2']))+' of Type 2, '\
-              +str(int(conf['nrun']*conf['ncor']))+' iterations, '\
+              #+str(int(conf['npart2']))+' of Type 2, '\
+              +str(int(conf['nrun']*conf['ncor']))+' iterations, \n'\
+              +'Adhesion: '+str(conf['adh1'])+', '\
+              +'Contact: '+str(conf['contact'])+', \n'\
+              +'Propulsion: '+str(conf['vprop1'])+', '\
+              +'Repulsion: '+str(conf['repul1'])+', \n'\
               +str(int(conf['nitn']))+' trials',\
-              fontsize=18)
+              fontsize=14)
 
   # Initial positions
   fig.add_subplot(2,2,1,aspect='equal')
@@ -66,7 +70,7 @@ python fourplot.py sysparam.dat initpos.dat gr.dat finalpos.dat msd.dat')
   fig.gca().set_title('Mean Square Displacement')
   
   fig.tight_layout()
-  fig.subplots_adjust(top=0.88)
+  fig.subplots_adjust(top=0.85)
   
   plt.savefig('circ.png')
   plt.show()
