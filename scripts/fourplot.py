@@ -72,5 +72,5 @@ python fourplot.py sysparam.dat initpos.dat gr.dat finalpos.dat msd.dat')
   fig.tight_layout()
   fig.subplots_adjust(top=0.85)
   
-  plt.savefig('circ.png')
+  plt.savefig('fourplot.png')
   plt.show()
