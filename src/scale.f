@@ -157,7 +157,7 @@ c       Record parameters.
         write(1,'(t5,a9,t34,e17.10)') 'Contact = ',contact
         write(1,'(t5,a9,t34,e17.10)') 'Adh1 = ',adhesion1
         write(1,'(t5,a9,t34,e17.10)') 'Adh2 = ',adhesion2
-        write(1,'(t5,a9,t34,e17.10)') 'Adh12 = ',adhesion1
+        write(1,'(t5,a9,t34,e17.10)') 'Adh12 = ',adhesion12
         write(1,'(t5,a9,t34,e17.10)') 'Repul1 = ',repul1
         write(1,'(t5,a9,t34,e17.10)') 'Repul2 = ',repul2
         write(1,'(t5,a9,t34,e17.10)') 'Vprop1 = ',vprop1
