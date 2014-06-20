@@ -49,7 +49,7 @@ c       Set experimental parameters (in CGS units).
         lattice=0 ! 0 = lattice, 1 = displaced lattice, 2 = random
         circ=1  ! 0 = box bounds, 1 = circular bounds
 
-        diffus=boltz*temp/(3.0d0*pi*eta*dia) ! cm**2/s
+        diffus= 2.15e-10 !boltz*temp/(3.0d0*pi*eta*dia) ! cm**2/s
         rotdiffus=500*boltz*temp/(pi*eta*dia*dia*dia) ! 1/s !*
 c       Set interaction parameters (dimensionless).
 c       Screened Coulomb Potential
@@ -63,16 +63,16 @@ c       Lennard-Jones Potential
         epsilon2=0.0d0
         epsilon12=0.0d0
 c       Hookean Contact Repulsion (Soft <= ~0.01; Hard >= ~0.1)
-        repul1=0.0 !1.0d-2 !0.31623d-2 ! (thermal energy unit / particle length unit)
+        repul1=1.6d8 !Healthy ! (thermal energy unit / particle length unit)
         repul2=0.0 !repul1
         repul12=0.0 !2*repul1*repul2/(repul1+repul2) !*
 c       Contact Adhesion Force
         contact=0.1*dia
-        adhesion1=1d-1 ! (thermal energy unit / particle length unit)
+        adhesion1=0.0 !1d-1 ! (thermal energy unit / particle length unit)
         adhesion2=0.0d0
         adhesion12=0.0d0
 c       Self-Propulsion Speed
-        vprop1=0.0 !1.0d2 ! (particle length unit / diffusion time unit)
+        vprop1=5.0d4 ! (particle length unit / diffusion time unit)
         vprop2=0.0 !vprop1*0.50
         
 c       Set dimensionless units.
