@@ -33,13 +33,15 @@ c       Set constants (in CGS units).
         elcharge=4.803d-10 ! statC
         
 c       Set experimental parameters (in CGS units).
-        dt=1.0d-6 ! s
+        dt=1.0d-4 ! s
         temp=298.0d0 ! K
-        dia=1.07d-4 ! cm
+        dia=15.0d-4 ! cm
         eta=1.0d-2 ! g/(cm*s)
         packing=0.40d0 ! %
         npart=npart1+npart2
         seed1a=-74300007
+
+        diffus=boltz*temp/(3.0d0*pi*eta*dia) ! cm**2/s
         seed1b=-25255273
         seed1c=-83647528
         seed2a=-62534449
@@ -49,7 +51,7 @@ c       Set experimental parameters (in CGS units).
         lattice=0 ! 0 = lattice, 1 = displaced lattice, 2 = random
         circ=1  ! 0 = box bounds, 1 = circular bounds
 
-        diffus= 2.15e-10 !boltz*temp/(3.0d0*pi*eta*dia) ! cm**2/s
+        diffus= boltz*temp/(3.0d0*pi*eta*dia) ! cm**2/s
         rotdiffus=500*boltz*temp/(pi*eta*dia*dia*dia) ! 1/s !*
 c       Set interaction parameters (dimensionless).
 c       Screened Coulomb Potential
@@ -63,7 +65,7 @@ c       Lennard-Jones Potential
         epsilon2=0.0d0
         epsilon12=0.0d0
 c       Hookean Contact Repulsion (Soft <= ~0.01; Hard >= ~0.1)
-        repul1=1.6d8 !Healthy ! (thermal energy unit / particle length unit)
+        repul1=2.0d3 !Healthy ! (thermal energy unit / particle length unit)
         repul2=0.0 !repul1
         repul12=0.0 !2*repul1*repul2/(repul1+repul2) !*
 c       Contact Adhesion Force
@@ -72,7 +74,7 @@ c       Contact Adhesion Force
         adhesion2=0.0d0
         adhesion12=0.0d0
 c       Self-Propulsion Speed
-        vprop1=5.0d4 ! (particle length unit / diffusion time unit)
+        vprop1=1.0d2 ! (particle length unit / diffusion time unit)
         vprop2=0.0 !vprop1*0.50
         
 c       Set dimensionless units.
