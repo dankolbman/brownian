@@ -51,7 +51,7 @@ c                    fljp=preljp1*forceljp(dia,dr)
                     frep=prerep1*forcerep(dia,dr)
                     fadh=preadh1*forceadh(dia,contact,dr)
 c                    netforces=fscp+fljp+frep+fadh
-                    netforces=frep!+fadh
+                    netforces=frep+fadh
                     
                     fx1(i)=fx1(i)+dx*netforces
                     fx1(j)=fx1(j)-dx*netforces
