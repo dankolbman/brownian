@@ -1,14 +1,14 @@
  Technical Parameters:
      nequil =                     10000
-       ncor =                    100000
+       ncor =                     10000
        nitn =                         1
-       nrun =                      2000
+       nrun =                     20000
 
  Experimental Parameters (de-dimensionalized):
     Temperature =                 0.2980000000E+03
     Diffusion =                   0.1000000000E+01
     Angular Diffusion =           0.1500000000E+04
-    Time Step =                   0.1292856865E-09
+    Time Step =                   0.1292856865E-07
     Packing Frac =                0.4000000000E+00
     Box Width =                   0.1848750437E+02
     Box Height =                  0.2134753125E+02
@@ -33,7 +33,7 @@
      Adh12 =                      0.0000000000E+00
     Repul1 =                      0.2000000000E+04
     Repul2 =                      0.0000000000E+00
-    Vprop1 =                      0.1000000000E+04
+    Vprop1 =                      0.1000000000E+05
     Vprop2 =                      0.0000000000E+00
 
  Calculated Force Coefficients (de-dimensionalized):
@@ -46,5 +46,5 @@
     Prerep1 =                     0.1333333333E+07
     Prerep2 =                     0.0000000000E+00
     Prerep12 =                    0.0000000000E+00
-    Pretrad =                     0.1243769134E+06
-    Prerotd =                     0.6227817110E-03
+    Pretrad =                     0.1243769134E+05
+    Prerotd =                     0.6227817110E-02
