@@ -1,7 +1,7 @@
  Technical Parameters:
      nequil =                     10000
        ncor =                      1000
-       nitn =                         1
+       nitn =                         5
        nrun =                      1000
 
  Experimental Parameters (de-dimensionalized):
