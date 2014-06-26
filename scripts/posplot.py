@@ -12,7 +12,7 @@ def plotSys(conf, arg):
   """ plotPos : Dict -> None
   Plots position data
   """
-  colors = ['r', 'g', 'b']
+  colors = ['r', 'b', 'c', 'm']
 
   for i in range(0,len(arg)):
     fig = plt.gcf()
