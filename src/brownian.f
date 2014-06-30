@@ -96,7 +96,8 @@ c       Establish system parameters.
 c           Arrange particles.
             call readcon()
             do j=1,nequil
-                call movepart(1)
+c               Do all forces
+                call movepart(0)
 c               Run loading bar.
                 loading1=20*j/nequil
                 loading2=20*(j-1)/nequil
