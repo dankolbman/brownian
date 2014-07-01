@@ -32,7 +32,7 @@ def plotMsd(conf, arg):
   plt.gcf().gca().set_title('Mean Square Displacement')
   plt.xlabel('Time')
   plt.ylabel('MSD')
-  plt.savefig('msd.png')
+  plt.savefig('msdlog.png')
 
 
 """

@@ -1,5 +1,5 @@
  Technical Parameters:
-     nequil =                    ******
+     nequil =                  10000000
        ncor =                      1000
        nitn =                         5
        nrun =                       100

@@ -14,7 +14,7 @@ c       gasdev = a normally-distributed random number generator
         include 'param'
         integer equil
         integer i
-        real*8 norma,normb,normc,phi,ranr
+        real*8 norma,normb,normc,phi,ranr,angle
         real*8 ran1,gasdev
         
         call forcecalc()
@@ -47,6 +47,10 @@ c             Accept move if within the bounds
               if( dsqrt(newx**2 + newy**2) .lt. radius-dia/2.0 ) then
                 x1(i)=newx
                 y1(i)=newy
+              else
+                angle = atan2(newy,newx)
+                x1(i)=(radius-dia/2.0)*cos(angle)
+                y1(i)=(radius-dia/2.0)*sin(angle)
               endif
             else
 c             Shift each particle.
@@ -76,6 +80,7 @@ c           fluctuations do not contribute during equilibriation.
      &          dfloat(1-equil)*pretrad*normb
             vy2(i)=dfloat(1-equil)*vprop2*dsin(theta2(i))+fy2(i)+
      &          dfloat(1-equil)*pretrad*normc
+
 c           Circular conditions
             if(circ .eq. 1) then
 c             Propose new coords
@@ -85,6 +90,10 @@ c             Accept move if within the bounds
               if( dsqrt(newx**2 + newy**2) .lt. radius-dia/2.0 ) then
                 x2(i)=newx
                 y2(i)=newy
+              else
+                angle = atan2(newy,newx)
+                x2(i)=(radius-dia/2.0)*cos(angle)
+                y2(i)=(radius-dia/2.0)*sin(angle)
               endif
             else
 c             Shift each particle.
