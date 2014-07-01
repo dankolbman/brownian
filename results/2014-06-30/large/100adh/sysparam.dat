@@ -1,6 +1,6 @@
  Technical Parameters:
-     nequil =                  10000000
-       ncor =                     10000
+     nequil =                    100000
+       ncor =                       100
        nitn =                         1
        nrun =                       100
 
@@ -10,9 +10,9 @@
     Angular Diffusion =           0.1500000000E+04
     Time Step =                   0.1292856865E-07
     Packing Frac =                0.4000000000E+00
-    Box Width =                   0.2608016031E+02
-    Box Height =                  0.3011477515E+02
-    Circle Rad =                  0.1581138830E+02
+    Box Width =                   0.4172825649E+02
+    Box Height =                  0.4818364023E+02
+    Circle Rad =                  0.2529822128E+02
        Circ =                         1
     Packing Frac =                0.4000000000E+00
     Time Unit =                   0.7734808291E+04
@@ -21,14 +21,14 @@
 
  Particle Parameters (de-dimensionalized):
     Diameter =                    0.1000000000E+01
-    Npart1 =                      200
-    Npart2 =                      200
+    Npart1 =                      512
+    Npart2 =                      512
     Charge1 =                     0.0000000000E+00
     Charge2 =                     0.0000000000E+00
     Epsilon1 =                    0.0000000000E+00
     Epsilon2 =                    0.0000000000E+00
     Contact =                     0.1000000015E+00
-      Adh1 =                      0.1000000000E+04
+      Adh1 =                      0.1000000000E+03
       Adh2 =                      0.0000000000E+00
      Adh12 =                      0.0000000000E+00
     Repul1 =                      0.1500000000E+05
