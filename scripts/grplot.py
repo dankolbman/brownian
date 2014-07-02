@@ -15,7 +15,7 @@ def plotGr(conf, arg):
   """ plotGr : Dict String[] -> None
   Plots the specified radial distribution files on a single plot
   """
-  colors = ['r', 'b', 'c', 'm']
+  colors = ['#E82C2C', '#245BFF', 'c', 'm']
   for i in range(0,len(arg)):
     r, gr = dataIO.readGr(arg[i])
     # Line

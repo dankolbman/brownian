@@ -13,7 +13,7 @@ def plotMsd(conf, arg):
   """ plotMsd : Dict String[] -> None
   Plots mean square displacement data
   """
-  colors = ['r', 'b', 'm', 'c']
+  colors = ['#E82C2C', '#245BFF', 'c', 'm']
   for i in range(0,len(arg)):
     t, msd = dataIO.readMsdave(arg[i])
     # Line
