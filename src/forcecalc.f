@@ -17,7 +17,7 @@ c       forceljp = calculates the position-dependence of the LJP
         real*8 dx,dy,dr
         real*8 frange
         real*8 fscp,fljp,frep,fadh,netforces
-        real*8 forcescp,forceljp,forcerep,forceadh
+        real*8 forcescp,forceljp,forcerep,forceadh,fadhnorm
         
         frange=6.0d0
         
@@ -49,7 +49,8 @@ c                   ...find the forces.
 c                    fscp=prescp1*forcescp(kappa,dr)
 c                    fljp=preljp1*forceljp(dia,dr)
                     frep=prerep1*forcerep(dia,dr)
-                    fadh=preadh1*forceadh(dia,contact,dr)
+c                    fadh=preadh1*forceadh(dia,contact,dr)
+                    fadh=preadh1*fadhnorm(dia,contact,dr)
 c                    netforces=fscp+fljp+frep+fadh
                     netforces=frep+fadh
                     
@@ -168,5 +169,21 @@ c-----------------------------------------------------------------------
         y=x-contact
         z=half*(((dabs(x)/x)-((dabs(y)-y)/y)))
         forceadh=z*((dia/dr)-1.0d0)
+        return
+        end
+
+c-----------------------------------------------------------------------
+        
+        function fadhnorm(dia,contact,dr)
+        real*8 fadhnorm
+        real*8 dia,contact,dr
+        real*8 x,z,s,pi
+        pi = 3.14159d0 
+        x = dr - dia
+        s = contact
+        x = x - contact/2.0d0
+        z=(1.0d0/(s*dsqrt(2.0d0*pi)))*
+     &    dexp(-1.0d0*(x**2.0)/(2.0d0*s**2.0))
+        fadhnorm = z*((dia/dr)-1.0d0)
         return
         end
