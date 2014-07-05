@@ -12,7 +12,7 @@ def plotSys(conf, arg):
   """ plotPos : Dict -> None
   Plots position data
   """
-  colors = ['r', 'b', 'c', 'm']
+  colors = ['#E82C2C', '#245BFF', 'c', 'm']
 
   for i in range(0,len(arg)):
     fig = plt.gcf()
@@ -25,6 +25,7 @@ def plotSys(conf, arg):
     #plt.scatter(xpos, ypos, s=s,color=colors[(i)%3])
 
   plotBounds(conf, plt.gcf().gca())
+  plt.savefig('fpos.png', figsize=(1,1), dpi=100)
 
 
 def plotBounds(conf, axes):
@@ -69,6 +70,7 @@ if __name__ == '__main__':
   else:
     # Get the configuration variables
     conf = dataIO.readConf(sys.argv[1])
+    plt.gcf().add_subplot(111, aspect='equal')
     plotSys(conf, sys.argv[2:])
     plt.show()
   
