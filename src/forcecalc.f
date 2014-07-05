@@ -181,9 +181,12 @@ c-----------------------------------------------------------------------
         pi = 3.14159d0 
         x = dr - dia
         s = contact
-        x = x - contact/2.0d0
+        x = x + contact*dia/3.0d0
         z=(1.0d0/(s*dsqrt(2.0d0*pi)))*
      &    dexp(-1.0d0*(x**2.0)/(2.0d0*s**2.0))
+        if( x .lt. 0 .or. x .gt. dia*(1+contact)) then
+          z = 0.0d0
+        endif
         fadhnorm = z*((dia/dr)-1.0d0)
         return
         end

@@ -91,7 +91,6 @@ c       Open data files.
         
 c       Establish system parameters.
         call scale()
-        
         do i=1,nitn
 c           Arrange particles.
             call readcon()
@@ -137,6 +136,7 @@ c           Save initial positions
             write(1300+i,*)
             write(1500+i,*)
             write(1500+i,*)
+
             
             do j=1,nrun
                 write(500+i,20)'% run','par','time','x','y'
@@ -160,6 +160,7 @@ c               Reset data.
                 vxave2=0.0d0
                 vyave2=0.0d0
                 vaverun2=0.0d0
+
                 
 c               Move particles.
                 do k=1,ncor
@@ -212,6 +213,7 @@ c                   Write position and velocity data per run.
                 vxave2=vxave2/dfloat(npart2)
                 vyave2=vyave2/dfloat(npart2)
                 vaverun2=dsqrt(vxave2*vxave2+vyave2*vyave2)
+
                 
  30             format(i3,t8,i3,t14,e12.5,t29,e17.10,t49,e17.10,t69,
      &              e17.10)
