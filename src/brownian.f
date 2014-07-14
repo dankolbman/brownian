@@ -29,7 +29,7 @@ c       vaveruni = the average speed as it evolves for each trial
 c       deltaai = the displacement between runs
 c       outfile,istring = strings for file naming
         
-        program brownian
+        program brownian8
         include 'param'
         integer time(3)
         integer loading1,loading2
@@ -39,10 +39,6 @@ c        real*8 rxold1(npart1),ryold1(npart1)
         real*8 msdave1(nrun),msdave2(nrun)
         real*8 vxave1,vyave1,vaverun1,vxave2,vyave2,vaverun2
         real*8 deltax1,deltay1,deltax2,deltay2
-        real*8 pcorr,dpers,dperslag,stddev,stddevlag
-        real*8 pers1(nrun,npart1),pers2(nrun,npart2)
-        real*8 persave1(nrun),persave2(nrun)
-        real*8 perssqrave1(nrun),perssqrave2(nrun)
         character outfile*15,istring*3
         
         call itime(time)
@@ -61,8 +57,6 @@ c       Open data files.
         open(unit=19,file='gr12ave.dat',status='unknown')
         open(unit=30,file='vave1.dat',status='unknown')
         open(unit=31,file='vave2.dat',status='unknown')
-        open(unit=32,file='pers1.dat')
-        open(unit=33,file='pers2.dat')
         
         do i=1,nitn
             write(istring,'(i3)') i
@@ -143,6 +137,7 @@ c           Save initial positions
             write(1500+i,*)
             write(1500+i,*)
 
+            
             do j=1,nrun
                 write(500+i,20)'% run','par','time','x','y'
                 write(700+i,20)'% run','par','time','x','y'
@@ -165,11 +160,8 @@ c               Reset data.
                 vxave2=0.0d0
                 vyave2=0.0d0
                 vaverun2=0.0d0
-                persave1(j)=0.0d0
-                perssqrave1(j)=0.0d0
-                persave2(j)=0.0d0
-                perssqrave2(j)=0.0d0
 
+                
 c               Move particles.
                 do k=1,ncor
                     call movepart(0)
@@ -177,8 +169,7 @@ c               Move particles.
                 
 c               Produce radial distribution histogram data.
                 call grcalc()
-                write(500+i,20)'% run','par','time','x','y'
-                write(900+i,20)'% run','par','time','vx','vy'
+                
                 do k=1,npart1
 c                   Calculate statistics of motion.
                     if( circ .eq. 1) then
@@ -195,29 +186,12 @@ c                     Don't need to worry about wrap in circular bounds
                     vyave1=vyave1+vy1(k)
 c                   Write position and velocity data per run.
                     write(500+i,30) j,k,dfloat(j)*ncor*dt,x1(k),y1(k)
-                write(500+i,*)
-                write(500+i,*)
-                write(900+i,*)
-                write(900+i,*)
                     write(900+i,30) j,k,dfloat(j)*ncor*dt,vx1(k),vy1(k)
-c                   Calculate the orientation over time.
-                    pers1(j,k)=dsqrt(vx1(k)*vx1(k)+vy1(k)*vy1(k))
-                    pers1(j,k)=vx1(k)/pers1(j,k)
-                    persave1(j)=persave1(j)+pers1(j,k)
-                    perssqrave1(j)=perssqrave1(j)+pers1(j,k)*pers1(j,k)
-                write(500+i,*)
-                write(500+i,*)
-                write(900+i,*)
-                write(900+i,*)
                 enddo
                 vxave1=vxave1/dfloat(npart1)
                 vyave1=vyave1/dfloat(npart1)
                 vaverun1=dsqrt(vxave1*vxave1+vyave1*vyave1)
-                persave1(j)=persave1(j)/dfloat(npart1)
-                perssqrave1(j)=perssqrave1(j)/dfloat(npart1)
                 
-                write(700+i,20)'% run','par','time','x','y'
-                write(1100+i,20)'% run','par','time','vx','vy'
                 do k=1,npart2
 c                   Calculate statistics of motion.
                     if( circ .eq. 1) then
@@ -234,25 +208,23 @@ c                     Don't need to worry about wrap in circular bounds
                     vyave2=vyave2+vy2(k)
 c                   Write position and velocity data per run.
                     write(700+i,30) j,k,dfloat(j)*ncor*dt,x2(k),y2(k)
-c                   Calculate the orientation over time.
-                    pers2(j,k)=dsqrt(vx2(k)*vx2(k)+vy2(k)*vy2(k))
-                    pers2(j,k)=vx2(k)/pers2(j,k)
-                    persave2(j)=persave2(j)+pers2(j,k)
-                    perssqrave2(j)=perssqrave2(j)+pers2(j,k)*pers2(j,k)
                     write(1100+i,30) j,k,dfloat(j)*ncor*dt,vx2(k),vy2(k)
                 enddo
-                write(700+i,*)
-                write(700+i,*)
-                write(1100+i,*)
-                write(1100+i,*)
                 vxave2=vxave2/dfloat(npart2)
                 vyave2=vyave2/dfloat(npart2)
                 vaverun2=dsqrt(vxave2*vxave2+vyave2*vyave2)
-                persave2(j)=persave2(j)/dfloat(npart2)
-                perssqrave2(j)=perssqrave2(j)/dfloat(npart2)
+
                 
  30             format(i3,t8,i3,t14,e12.5,t29,e17.10,t49,e17.10,t69,
      &              e17.10)
+                write(500+i,*)
+                write(500+i,*)
+                write(700+i,*)
+                write(700+i,*)
+                write(900+i,*)
+                write(900+i,*)
+                write(1100+i,*)
+                write(1100+i,*)
                 
 c               Calculate mean square displacement.
                 meansqrdis1=sumsqrdis1/dfloat(npart1)
@@ -310,39 +282,6 @@ c                 Positions
                 write(16,*)
             enddo
             
-c           Calculate time correlation of persistence.
-c            write(32,10) '% itn','lag','time','correlation'
-c            write(33,10) '% itn','lag','time','correlation'
-            do j=1,nrun
-                pcorr=0.0d0
-                do k=1,npart1
-                    dpers=pers1(nrun,k)-persave1(nrun)
-                    dperslag=pers1(j,k)-persave1(j)
-                    pcorr=pcorr+dpers*dperslag
-                enddo
-                pcorr=pcorr/dfloat(npart1)
-                stddev=dsqrt(perssqrave1(nrun)-persave1(nrun)**2)
-                stddevlag=dsqrt(perssqrave1(j)-persave1(j)**2)
-                pcorr=pcorr/stddev/stddevlag
-                write(32,50) i,(nrun-j),(dfloat(nrun-j)*ncor*dt),pcorr
-
-                pcorr=0.0d0
-                do k=1,npart2
-                    dpers=pers2(nrun,k)-persave2(nrun)
-                    dperslag=pers2(j,k)-persave2(j)
-                    pcorr=pcorr+dpers*dperslag
-                enddo
-                pcorr=pcorr/dfloat(npart2)
-                stddev=dsqrt(perssqrave2(nrun)-persave2(nrun)**2)
-                stddevlag=dsqrt(perssqrave2(j)-persave2(j)**2)
-                pcorr=pcorr/stddev/stddevlag
-                write(33,50) i,(nrun-j),(dfloat(nrun-j)*ncor*dt),pcorr
-            enddo
-            write(32,*)
-            write(32,*)
-            write(33,*)
-            write(33,*)
-            
             write(10,*)
             write(10,*)
             write(11,*)
@@ -353,8 +292,6 @@ c            write(33,10) '% itn','lag','time','correlation'
             write(31,*)
         enddo
         
-c        write(12,10) '% 0','run','time','mean square displacement'
-c        write(13,10) '% 0','run','time','mean square displacement'
         do i=1,nrun
             msdave1(i)=msdave1(i)/nitn
             msdave2(i)=msdave2(i)/nitn
