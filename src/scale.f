@@ -35,7 +35,7 @@ c       Set constants (in CGS units).
 c       Set experimental parameters (in CGS units).
         dt=1.0d-6 ! s
         temp=298.0d0 ! K
-        dia=15.0d-4 ! cm
+        dia=15.0d-5 ! cm
         eta=1.0d-2 ! g/(cm*s)
         packing=0.40d0 ! %
         npart=npart1+npart2
