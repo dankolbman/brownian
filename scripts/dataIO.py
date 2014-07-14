@@ -50,6 +50,24 @@ def readMsdave(filen):
   f.close()
   return time, msd
 
+def readPers(filen):
+  """ readPers : String -> float[] float[]
+  Read persistance data and return lag time, persistance
+  """
+  time=[]
+  pers=[]
+  try:
+    f = open(filen)
+    for line in f:
+      l = line.split()
+      if len(l) < 4: break
+      time.append(float(l[2]))
+      pers.append(float(l[3]))
+  except IOError as e:
+    print('IO Error!', e.strerror)
+  f.close()
+  return time, pers
+
 def readGr(filen):
   """ readGr : String -> float[] float[]
   Reads radial distribution function data from file
