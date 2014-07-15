@@ -49,8 +49,8 @@ c                   ...find the forces.
 c                    fscp=prescp1*forcescp(kappa,dr)
 c                    fljp=preljp1*forceljp(dia,dr)
                     frep=prerep1*forcerep(dia,dr)
-c                    fadh=preadh1*forceadh(dia,contact,dr)
-                    fadh=preadh1*fadhnorm(dia,contact,dr)
+                    fadh=preadh1*forceadh(dia,contact,dr)
+c                    fadh=preadh1*fadhnorm(dia,contact,dr)
 c                    netforces=fscp+fljp+frep+fadh
                     netforces=frep+fadh
                     
@@ -166,9 +166,10 @@ c-----------------------------------------------------------------------
         parameter(half=0.5d0)
         
         x=dr-dia
-        y=x-contact
-        z=half*(((dabs(x)/x)-((dabs(y)-y)/y)))
-        forceadh=z*((dia/dr)-1.0d0)
+        y=x-contact-contact
+        z=half*((((dabs(x)-x)/x)-((dabs(y)-y)/y)))
+c        forceadh=-1.0d0*z*( dabs(1 - (dia+contact)/dr) - contact/dr)
+        forceadh = z*(dabs(1.0d0-((dia+contact)/dr))-(contact/dr))
         return
         end
 
