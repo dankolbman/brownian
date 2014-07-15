@@ -166,9 +166,10 @@ c-----------------------------------------------------------------------
         parameter(half=0.5d0)
         
         x=dr-dia
-        y=x-contact
-        z=half*(((dabs(x)/x)-((dabs(y)-y)/y)))
-        forceadh=-1.0d0*z*( dabs(1 - (dia+contact)/dr) - contact/dr)
+        y=x-contact-contact
+        z=half*((((dabs(x)-x)/x)-((dabs(y)-y)/y)))
+c        forceadh=-1.0d0*z*( dabs(1 - (dia+contact)/dr) - contact/dr)
+        forceadh = z*(dabs(1.0d0-((dia+contact)/dr))-(contact/dr))
         return
         end
 
