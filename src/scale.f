@@ -33,9 +33,9 @@ c       Set constants (in CGS units).
         elcharge=4.803d-10 ! statC
         
 c       Set experimental parameters (in CGS units).
-        dt=1.0d-6 ! s
+        dt=1.0d-4 ! s
         temp=298.0d0 ! K
-        dia=15.0d-5 ! cm
+        dia=15.0d-4 ! cm
         eta=1.0d-2 ! g/(cm*s)
         packing=0.40d0 ! %
         npart=npart1+npart2
@@ -65,12 +65,12 @@ c       Lennard-Jones Potential
         epsilon2=0.0d0 
         epsilon12=0.0d0
 c       Hookean Contact Repulsion (Soft <= ~0.01; Hard >= ~0.1)
-        repul1=1.5d4 !Healthy ! (thermal energy unit / particle length unit)
+        repul1=1.54 !Healthy ! (thermal energy unit / particle length unit)
         repul2=0.5d4 !repul1
         repul12=2*repul1*repul2/(repul1+repul2) !*
 c       Contact Adhesion Force
         contact=0.1*dia
-        adhesion1=1.0d3 !1d-1 ! (thermal energy unit / particle length unit)
+        adhesion1=1.0d1 !1d-1 ! (thermal energy unit / particle length unit)
         adhesion2=0.0d0
         adhesion12=0.0d0
 c       Self-Propulsion Speed
