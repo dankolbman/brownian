@@ -33,10 +33,14 @@ c           Calculate particle velocity.
 c           Here, during equilibriation, equil=1, and during motion-
 c           tracking, equil=0. Therefore, self-propulsion and thermal 
 c           fluctuations do not contribute during equilibriation.
-            vx1(i)=dfloat(1-equil)*vprop1*dcos(theta1(i))+fx1(i)+
-     &          dfloat(1-equil)*pretrad*normb
-            vy1(i)=dfloat(1-equil)*vprop1*dsin(theta1(i))+fy1(i)+
-     &          dfloat(1-equil)*pretrad*normc
+c            vx1(i)=dfloat(1-equil)*vprop1*dcos(theta1(i))+fx1(i)+
+c     &          dfloat(1-equil)*pretrad*normb
+c            vy1(i)=dfloat(1-equil)*vprop1*dsin(theta1(i))+fy1(i)+
+c     &          dfloat(1-equil)*pretrad*normc
+            vx1(i)=vprop1*dcos(theta1(i))+fx1(i)+
+     &          pretrad*normb
+            vy1(i)=vprop1*dsin(theta1(i))+fy1(i)+
+     &          pretrad*normc
 
 c           Circular conditions
             if(circ .eq. 1) then
@@ -44,7 +48,7 @@ c             Propose new coords
               newx=x1(i)+dt*vx1(i)
               newy=y1(i)+dt*vy1(i)
 c             Accept move if within the bounds
-              if( dsqrt(newx**2 + newy**2) .lt. radius-dia/2.0 ) then
+              if( (newx**2 + newy**2) .lt. (radius-dia*0.5d0)**2 ) then
                 x1(i)=newx
                 y1(i)=newy
               else
@@ -76,10 +80,14 @@ c           Calculate particle velocity.
 c           Here, during equilibriation, equil=1, and during motion-
 c           tracking, equil=0. Therefore, self-propulsion and thermal 
 c           fluctuations do not contribute during equilibriation.
-            vx2(i)=dfloat(1-equil)*vprop2*dcos(theta2(i))+fx2(i)+
-     &          dfloat(1-equil)*pretrad*normb
-            vy2(i)=dfloat(1-equil)*vprop2*dsin(theta2(i))+fy2(i)+
-     &          dfloat(1-equil)*pretrad*normc
+c            vx2(i)=dfloat(1-equil)*vprop2*dcos(theta2(i))+fx2(i)+
+c     &          dfloat(1-equil)*pretrad*normb
+c            vy2(i)=dfloat(1-equil)*vprop2*dsin(theta2(i))+fy2(i)+
+c     &          dfloat(1-equil)*pretrad*normc
+            vx2(i)=vprop2*dcos(theta2(i))+fx2(i)+
+     &          pretrad*normb
+            vy2(i)=vprop2*dsin(theta2(i))+fy2(i)+
+     &          pretrad*normc
 
 c           Circular conditions
             if(circ .eq. 1) then
@@ -87,7 +95,7 @@ c             Propose new coords
               newx=x2(i)+dt*vx2(i)
               newy=y2(i)+dt*vy2(i)
 c             Accept move if within the bounds
-              if( dsqrt(newx**2 + newy**2) .lt. radius-dia/2.0 ) then
+              if( (newx**2 + newy**2) .lt. (radius-dia*0.5d0)**2 ) then
                 x2(i)=newx
                 y2(i)=newy
               else

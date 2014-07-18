@@ -19,7 +19,8 @@ c       forceljp = calculates the position-dependence of the LJP
         real*8 fscp,fljp,frep,fadh,netforces
         real*8 forcescp,forceljp,forcerep,forceadh,fadhnorm
         
-        frange=6.0d0
+        frange=1.5d0
+        frange=frange*frange
         
 c       Reset all forces.
         do i=1,npart1
@@ -42,9 +43,10 @@ c               ...find the distance between the particles.
                   dx=dx-boxx*anint(dx*invboxx)
                   dy=dy-boxy*anint(dy*invboxy)
                 endif
-                dr=dsqrt(dx*dx+dy*dy)
+                dr= dx*dx+dy*dy !dsqrt(dx*dx+dy*dy)
 c               For all particles within a given proximity...
                 if (dr .le. frange) then
+                    dr = dsqrt(dr)
 c                   ...find the forces.
 c                    fscp=prescp1*forcescp(kappa,dr)
 c                    fljp=preljp1*forceljp(dia,dr)
@@ -73,15 +75,17 @@ c               ...find the distance between the particles.
                   dx=dx-boxx*anint(dx*invboxx)
                   dy=dy-boxy*anint(dy*invboxy)
                 endif
-                dr=dsqrt(dx*dx+dy*dy)
+                dr= dx*dx+dy*dy !dsqrt(dx*dx+dy*dy)
 c               For all particles within a given proximity...
                 if (dr .le. frange) then
+                    dr = dsqrt(dr)
 c                   ...find the forces.
-                    fscp=prescp2*forcescp(kappa,dr)
-                    fljp=preljp2*forceljp(dia,dr)
+c                    fscp=prescp2*forcescp(kappa,dr)
+c                    fljp=preljp2*forceljp(dia,dr)
                     frep=prerep2*forcerep(dia,dr)
-                    fadh=preadh2*forceadh(dia,contact,dr)
-                    netforces=fscp+fljp+frep+fadh
+c                    fadh=preadh2*forceadh(dia,contact,dr)
+c                    netforces=fscp+fljp+frep+fadh
+                    netforces=frep
                     
                     fx2(i)=fx2(i)+dx*netforces
                     fx2(j)=fx2(j)-dx*netforces
@@ -102,15 +106,17 @@ c               ...find the distance between the particles.
                   dx=dx-boxx*anint(dx*invboxx)
                   dy=dy-boxy*anint(dy*invboxy)
                 endif
-                dr=dsqrt(dx*dx+dy*dy)
+                dr= dx*dx+dy*dy !dsqrt(dx*dx+dy*dy)
 c               For all particles within a given proximity...
                 if (dr .le. frange) then
+                    dr = dsqrt(dr)
 c                   ...find the forces.
-                    fscp=prescp12*forcescp(kappa,dr)
-                    fljp=preljp12*forceljp(dia,dr)
+c                    fscp=prescp12*forcescp(kappa,dr)
+c                    fljp=preljp12*forceljp(dia,dr)
                     frep=prerep12*forcerep(dia,dr)
-                    fadh=preadh12*forceadh(dia,contact,dr)
-                    netforces=fscp+fljp+frep+fadh
+c                    fadh=preadh12*forceadh(dia,contact,dr)
+c                    netforces=fscp+fljp+frep+fadh
+                    netforces=frep
                     
                     fx1(i)=fx1(i)+dx*netforces
                     fx2(j)=fx2(j)-dx*netforces
@@ -153,7 +159,7 @@ c-----------------------------------------------------------------------
         real*8 x
         
         x=1.0d0-(dia/dr)
-        forcerep=(dabs(x)-x)/2.0d0
+        forcerep=(dabs(x)-x)*0.5d0
         
         return
         end
