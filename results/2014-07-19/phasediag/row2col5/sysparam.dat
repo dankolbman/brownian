@@ -1,0 +1,50 @@
+ Technical Parameters:
+     nequil =                    ******
+       ncor =                     10000
+       nitn =                        10
+       nrun =                      1000
+
+ Experimental Parameters (de-dimensionalized):
+    Temperature =                 0.2980000000E+03
+    Diffusion =                   0.1000000000E+01
+    Angular Diffusion =           0.1500000000E+04
+    Time Step =                   0.1292856865E-07
+    Packing Frac =                0.4000000000E+00
+    Box Width =                   0.2608016031E+02
+    Box Height =                  0.3011477515E+02
+    Circle Rad =                  0.1581138830E+02
+       Circ =                         1
+    Packing Frac =                0.4000000000E+00
+    Time Unit =                   0.7734808291E+04
+    Length Unit =                 0.1500000000E-02
+    Energy Unit =                 0.4112400000E-13
+
+ Particle Parameters (de-dimensionalized):
+    Diameter =                    0.1000000000E+01
+    Npart1 =                      200
+    Npart2 =                      200
+    Charge1 =                     0.0000000000E+00
+    Charge2 =                     0.0000000000E+00
+    Epsilon1 =                    0.0000000000E+00
+    Epsilon2 =                    0.0000000000E+00
+    Contact =                     0.1000000015E+00
+      Adh1 =                      0.1500000000E+07
+      Adh2 =                      0.0000000000E+00
+     Adh12 =                      0.0000000000E+00
+    Repul1 =                      0.1500000000E+05
+    Repul2 =                      0.5000000000E+03
+    Vprop1 =                      0.1000000000E+04
+    Vprop2 =                      0.1000000000E+04
+
+ Calculated Force Coefficients (de-dimensionalized):
+    Prescp1 =                     0.0000000000E+00
+    Prescp2 =                     0.0000000000E+00
+    Prescp12 =                    0.0000000000E+00
+    Preljp1 =                     0.0000000000E+00
+    Preljp2 =                     0.0000000000E+00
+    Preljp12 =                    0.0000000000E+00
+    Prerep1 =                     0.1000000000E+08
+    Prerep2 =                     0.3333333333E+06
+    Prerep12 =                    0.6451612903E+06
+    Pretrad =                     0.1243769134E+05
+    Prerotd =                     0.6227817110E-02
